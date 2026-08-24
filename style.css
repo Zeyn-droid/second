@@ -10,7 +10,43 @@ body {
   color: #333;
   display: flex;
   justify-content: center;
-  padding: 20px 10px;
+  padding: 30px 10px;
+}
+
+/* Дөңгелек айналмалы музыка батырмасы */
+.music-disc-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b38e46, #d4af37);
+  color: white;
+  border: 2px solid #fff;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  outline: none;
+  transition: transform 0.2s ease;
+}
+
+.music-disc-btn:active {
+  transform: scale(0.9);
+}
+
+/* Айналу анимациясы */
+.music-disc-btn.spinning {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .container {
@@ -129,7 +165,7 @@ textarea {
   resize: vertical;
 }
 
-button {
+button[type="submit"] {
   background-color: #b38e46;
   color: white;
   border: none;
@@ -141,7 +177,7 @@ button {
   transition: background 0.3s;
 }
 
-button:hover {
+button[type="submit"]:hover {
   background-color: #967435;
 }
 
