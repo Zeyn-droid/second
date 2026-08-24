@@ -4,9 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Салауат & Аида Тойға шақыру</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=1.3">
 </head>
 <body>
+
+  <!-- Музыка қосу/өшіру батырмасы -->
+  <button id="musicToggle" class="music-btn">
+    🎵 Музыканы қосу
+  </button>
+  <audio id="bgMusic" src="miras-zhugunusov-feat.-kazybek-kuraiysh-ashypyn.mp3" loop></audio>
 
   <div class="container">
     
@@ -74,7 +80,7 @@
   </div>
 
   <script>
-    // Обратный отсчет до 3 октября 2026 года, 19:00
+    // 3 қазан 2026 жыл, сағат 19:00 кезеңіне дейінгі таймер
     const targetDate = new Date("October 3, 2026 19:00:00").getTime();
 
     const countdown = setInterval(() => {
@@ -97,6 +103,36 @@
       document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
       document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
     }, 1000);
+
+    // Музыканы басқару скрипті
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicToggle');
+
+    let isPlaying = false;
+
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        music.pause();
+        musicBtn.innerText = '🎵 Музыканы қосу';
+        musicBtn.classList.remove('playing');
+      } else {
+        music.play();
+        musicBtn.innerText = '🔊 Музыканы өшіру';
+        musicBtn.classList.add('playing');
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // Қонақ экранды бірінші рет басқанда музыка қосылуы үшін
+    document.body.addEventListener('click', () => {
+      if (!isPlaying) {
+        music.play().then(() => {
+          isPlaying = true;
+          musicBtn.innerText = '🔊 Музыканы өшіру';
+          musicBtn.classList.add('playing');
+        }).catch(e => console.log("Автоплей тоқтатылды"));
+      }
+    }, { once: true });
   </script>
 
 </body>
