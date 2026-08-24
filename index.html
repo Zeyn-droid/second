@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Салауат & Аида Тойға шақыру</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Шақыру мәтіні -->
+    <section class="invitation-card">
+      <h2 class="title">Құрметті</h2>
+      <p class="subtitle">
+        ағайын-туыс, бауырлар, нағашы-жиен,<br>
+        бөлелер, құда-жекжат,<br>
+        дос-жаран, әріптестер, көршілер!
+      </p>
+      <p class="main-text">
+        Сіздерді<br>
+        баламыз <strong>Салауат</strong> пен келініміз <strong>Аиданың</strong><br>
+        үйлену тойына арналған салтанатты<br>
+        дастарханымыздың қадірлі қонағы болуға<br>
+        шақырамыз!
+      </p>
+
+      <div class="event-details">
+        <h3 class="event-title">Той Салтанаты</h3>
+        <p class="event-date">03.10.2026</p>
+        <p class="event-time">Уақыты: 19:00</p>
+      </div>
+    </section>
+
+    <!-- Мекенжайы -->
+    <section class="info-card">
+      <h3>Мекенжайы:</h3>
+      <p>«Алтын Сарай» мейрамханасы</p>
+    </section>
+
+    <!-- Таймер -->
+    <section class="timer-card">
+      <h3>Тойдың басталуына қалды:</h3>
+      <div id="timer" class="timer-grid">
+        <div class="time-box"><span id="days">00</span><small>күн</small></div>
+        <div class="time-box"><span id="hours">00</span><small>сағат</small></div>
+        <div class="time-box"><span id="minutes">00</span><small>минут</small></div>
+        <div class="time-box"><span id="seconds">00</span><small>секунд</small></div>
+      </div>
+    </section>
+
+    <!-- Форма -->
+    <section class="form-card">
+      <h3>Тойға келетініңізді растаңыз</h3>
+      <p class="form-sub">Өтініш, 2026 жылдың 20 қыркүйегіне дейін жауап берсеңіздер</p>
+      
+      <form action="https://formspree.io/f/mvkpjzbb" method="POST">
+        <input type="text" name="name" placeholder="Аты-жөніңіз" required>
+        
+        <select name="attendance" required>
+          <option value="" disabled selected>Тойға келесіз бе?</option>
+          <option value="Иә, келемін">Иә, келемін</option>
+          <option value="Жұбыммен барамын">Жұбыммен барамын</option>
+          <option value="Өкінішке орай, бара алмаймын">Өкінішке орай, бара алмаймын</option>
+        </select>
+        
+        <textarea name="message" placeholder="Ақ тілектер мен тілектеріңіз (міндетті емес)"></textarea>
+        
+        <button type="submit">Жауапты жіберу</button>
+      </form>
+    </section>
+
+  </div>
+
+  <script>
+    // Обратный отсчет до 3 октября 2026 года, 19:00
+    const targetDate = new Date("October 3, 2026 19:00:00").getTime();
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference < 0) {
+        clearInterval(countdown);
+        document.getElementById("timer").innerHTML = "<p>Той басталды!</p>";
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+      document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+      document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+      document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+    }, 1000);
+  </script>
+
+</body>
+</html>
