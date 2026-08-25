@@ -4,26 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Салауат & Аида Тойға шақыру</title>
-  <link rel="stylesheet" href="style.css?v=9.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Фондық музыка (әннің файлы: miras-ashypyn.mp3) -->
-  <audio id="bgMusic" src="miras-ashypyn.mp3" loop preload="auto"></audio>
-
-  <!-- Музыка блогы: Дөңгелек батырма + Ән атауы -->
+  <!-- Музыка батырмасы -->
+  <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
   <div class="music-player-widget">
-    <button id="musicToggle" class="music-disc-btn" title="Музыканы қосу/өшіру">
-      🎵
-    </button>
-    <div class="song-title" id="songTitle">
-      Miras Zhugunusov feat. Kazybek Kuraiysh — Ashypyn
-    </div>
+    <button id="musicToggle" class="music-disc-btn" title="Музыка">🎵</button>
+    <div class="song-title" id="songTitle">Miras Zhugunusov feat. Kazybek Kuraiysh — Ashypyn</div>
   </div>
 
   <div class="container">
-    
-    <!-- Шақыру мәтіні -->
     <section class="invitation-card">
       <h2 class="title">Құрметті</h2>
       <p class="subtitle">
@@ -39,22 +31,19 @@
         шақырамыз!
       </p>
 
-      <!-- Той Салтанаты -->
       <div class="event-details">
         <h3 class="event-title">Той Салтанаты</h3>
         <p class="event-date">03.10.2026</p>
         <p class="event-time">Уақыты: 19:00</p>
       </div>
 
-      <!-- Мекенжайы -->
-      <section class="info-card" style="box-shadow: none; padding: 15px 0 0 0; background: transparent;">
-        <h3>Мекенжайы:</h3>
-        <p>«Алтын Сарай» мейрамханасы</p>
-      </section>
+      <div class="address-section">
+        <h3 class="address-title">Мекенжайы:</h3>
+        <p class="address-text">«Алтын Сарай» мейрамханасы</p>
+      </div>
 
       <p class="share-text">Бізбен бірге қуанышымызды бөлісіңіз!</p>
 
-      <!-- Той Иелері -->
       <div class="hosts-section">
         <p class="hosts-title">Той Иелері:</p>
         <p class="host-name">Әжесі Мерузия</p>
@@ -62,7 +51,6 @@
       </div>
     </section>
 
-    <!-- Таймер -->
     <section class="timer-card">
       <h3>Тойдың басталуына қалды:</h3>
       <div id="timer" class="timer-grid">
@@ -73,7 +61,6 @@
       </div>
     </section>
 
-    <!-- Форма -->
     <section class="form-card">
       <h3>Тойға келетініңізді растаңыз</h3>
       <p class="form-sub">Өтініш, 2026 жылдың 20 қыркүйегіне дейін жауап берсеңіздер</p>
@@ -93,7 +80,6 @@
         <button type="submit">Жауапты жіберу</button>
       </form>
     </section>
-
   </div>
 
   <script>
@@ -107,9 +93,7 @@
         isPlaying = true;
         musicBtn.classList.add('spinning');
         songTitle.classList.add('show');
-      }).catch(e => {
-        console.log("Автоплей бұғатталды");
-      });
+      }).catch(e => console.log(e));
     }
 
     function stopMusic() {
@@ -121,42 +105,24 @@
 
     musicBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (isPlaying) {
-        stopMusic();
-      } else {
-        playMusic();
-      }
+      isPlaying ? stopMusic() : playMusic();
     });
 
-    // Экранды алғаш рет түрткенде музыканы автоматты қосу
     document.addEventListener('click', () => {
-      if (!isPlaying) {
-        playMusic();
-      }
+      if (!isPlaying) playMusic();
     }, { once: true });
 
-    // Таймер
     const targetDate = new Date("October 3, 2026 19:00:00").getTime();
-
-    const countdown = setInterval(() => {
+    setInterval(() => {
       const now = new Date().getTime();
-      const difference = targetDate - now;
+      const diff = targetDate - now;
 
-      if (difference < 0) {
-        clearInterval(countdown);
-        document.getElementById("timer").innerHTML = "<p>Той басталды!</p>";
-        return;
-      }
+      if (diff < 0) return;
 
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-      document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-      document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-      document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-      document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+      document.getElementById("days").innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+      document.getElementById("hours").innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
     }, 1000);
   </script>
 
