@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Салауат & Аида — Тойға шақыру</title>
-  <!-- Подключение шрифтов -->
+  
+  <!-- Шрифттер -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   
-  <!-- Библиотека анимаций AOS (CSS) -->
+  <!-- AOS Анимация библиотекасы (CSS) -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,21 +23,22 @@
 
     <!-- 1. Главная карточка (Hero Section) -->
     <header class="hero-card">
+      <canvas id="sparklesCanvas"></canvas>
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <p class="top-date" data-aos="fade-down" data-aos-duration="1000">03.10.2026</p>
-        <h1 class="couple-names" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
+        <p class="top-date" data-aos="fade-down" data-aos-duration="1200">03.10.2026</p>
+        <h1 class="couple-names" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200">
           САЛАУАТ<br><span>&</span><br>АИДА
         </h1>
         
-        <!-- Кнопка плеера -->
-        <div class="player-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+        <!-- Виниловый плеер -->
+        <div class="player-container" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
           <button id="musicToggle" class="vinyl-disc" title="Музыканы қосу/өшіру">
             <span class="disc-center"></span>
           </button>
         </div>
         
-        <div id="scrollBtn" class="scroll-down-hint" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+        <div id="scrollBtn" class="scroll-down-hint" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600">
           <span>бастау</span>
           <div class="arrow-down">∨</div>
         </div>
@@ -184,18 +185,74 @@
 
   </div>
 
-  <!-- Библиотека анимаций AOS (JS) -->
+  <!-- AOS JS -->
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    // Скролл по кнопке "бастау"
-    const scrollBtn = document.getElementById('scrollBtn');
-    const invSection = document.getElementById('invitationSection');
-    if (scrollBtn && invSection) {
-      scrollBtn.addEventListener('click', () => {
-        invSection.scrollIntoView({ behavior: 'smooth' });
-      });
+    // 1. Анимации AOS
+    AOS.init({
+      once: true, 
+      duration: 1000, 
+      easing: 'ease-out-cubic'
+    });
+
+    // 2. Золотые блёстки на главном экране (Sparkles Effect)
+    const canvas = document.getElementById('sparklesCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
     }
-    // Плеер
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.5 + 0.5;
+        this.speedY = Math.random() * 0.8 + 0.2;
+        this.opacity = Math.random();
+        this.fade = Math.random() * 0.02 + 0.005;
+      }
+      update() {
+        this.y += this.speedY;
+        this.opacity -= this.fade;
+        if (this.y > canvas.height || this.opacity <= 0) {
+          this.reset();
+          this.y = 0;
+          this.opacity = 1;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#d4af37';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 45; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateSparkles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateSparkles);
+    }
+    animateSparkles();
+
+    // 3. Музыка
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicToggle');
     let isPlaying = false;
@@ -223,16 +280,40 @@
       }
     }, { once: true });
 
-    // Скролл по кнопке "бастау"
+    // 4. МЕДЛЕННЫЙ ПЛАВНЫЙ СКРОЛЛ ОТ НАЧАЛА ДО КОНЦА (4.5 секунды)
+    function smoothScrollToBottom(durationMs) {
+      const startPosition = window.pageYOffset || document.documentElement.scrollTop;
+      const targetPosition = document.documentElement.scrollHeight - window.innerHeight;
+      const distance = targetPosition - startPosition;
+      let startTime = null;
+
+      // Функция плавности (Ease-In-Out CUBIC)
+      function easeInOutCubic(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t * t + b;
+        t -= 2;
+        return c / 2 * (t * t * t + 2) + b;
+      }
+
+      function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = easeInOutCubic(timeElapsed, startPosition, distance, durationMs);
+        window.scrollTo(0, run);
+        if (timeElapsed < durationMs) requestAnimationFrame(animation);
+      }
+
+      requestAnimationFrame(animation);
+    }
+
     const scrollBtn = document.getElementById('scrollBtn');
-    const invSection = document.getElementById('invitationSection');
-    if (scrollBtn && invSection) {
+    if (scrollBtn) {
       scrollBtn.addEventListener('click', () => {
-        invSection.scrollIntoView({ behavior: 'smooth' });
+        smoothScrollToBottom(4500); // 4.5 секунды
       });
     }
 
-    // Таймер
+    // 5. Таймер
     const targetDate = new Date("October 3, 2026 19:00:00").getTime();
     setInterval(() => {
       const now = new Date().getTime();
