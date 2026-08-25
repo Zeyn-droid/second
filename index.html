@@ -8,8 +8,9 @@
 </head>
 <body>
 
-  <!-- Музыка батырмасы -->
+  <!-- Әнді файл атына сәйкестендіріп қойыңыз (мысалы: music.mp3) -->
   <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
+
   <div class="music-player-widget">
     <button id="musicToggle" class="music-disc-btn" title="Музыка">🎵</button>
     <div class="song-title" id="songTitle">Miras Zhugunusov feat. Kazybek Kuraiysh — Ashypyn</div>
@@ -86,31 +87,22 @@
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicToggle');
     const songTitle = document.getElementById('songTitle');
-    let isPlaying = false;
 
-    function playMusic() {
-      music.play().then(() => {
-        isPlaying = true;
-        musicBtn.classList.add('spinning');
-        songTitle.classList.add('show');
-      }).catch(e => console.log(e));
-    }
-
-    function stopMusic() {
-      music.pause();
-      isPlaying = false;
-      musicBtn.classList.remove('spinning');
-      songTitle.classList.remove('show');
-    }
-
-    musicBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      isPlaying ? stopMusic() : playMusic();
+    musicBtn.addEventListener('click', function() {
+      if (music.paused) {
+        music.play().then(() => {
+          musicBtn.classList.add('spinning');
+          songTitle.classList.add('show');
+        }).catch(err => {
+          alert("Музыка файлы табылмады немесе жүктелмеді! GitHub-та музыка файлының атын тексеріңіз.");
+          console.error(err);
+        });
+      } else {
+        music.pause();
+        musicBtn.classList.remove('spinning');
+        songTitle.classList.remove('show');
+      }
     });
-
-    document.addEventListener('click', () => {
-      if (!isPlaying) playMusic();
-    }, { once: true });
 
     const targetDate = new Date("October 3, 2026 19:00:00").getTime();
     setInterval(() => {
