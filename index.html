@@ -31,7 +31,7 @@
           </button>
         </div>
         
-        <div id="scrollBtn" class="scroll-down-hint">
+        <div class="scroll-down-hint">
           <span>бастау</span>
           <div class="arrow-down">∨</div>
         </div>
@@ -39,7 +39,7 @@
     </header>
 
     <!-- 2. Шақыру мәтіні -->
-    <section id="invitationSection" class="content-card invitation-section">
+    <section class="content-card invitation-section">
       <h2 class="script-heading">Құрметті</h2>
       <p class="guest-categories">
         АҒАЙЫН-ТУЫС, БАУЫРЛАР,<br>
@@ -135,8 +135,8 @@
         <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Мейрамхана">
       </div>
 
-      <!-- Исправленная прямая ссылка 2GIS -->
-      <a href="https://2gis.kz/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button">КАРТАНЫ АШУ</a>
+      <!-- Ссылка на 2GIS -->
+      <a href="https://2giskz.app/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button">КАРТАНЫ АШУ</a>
     </section>
 
     <!-- 7. Той иелері -->
@@ -209,15 +209,6 @@
         toggleMusic();
       }
     }, { once: true });
-
-    // Клик по кнопке скролла "бастау"
-    const scrollBtn = document.getElementById('scrollBtn');
-    const invSection = document.getElementById('invitationSection');
-    if (scrollBtn && invSection) {
-      scrollBtn.addEventListener('click', () => {
-        invSection.scrollIntoView({ behavior: 'smooth' });
-      });
-    }
 
     // 2. Таймер
     const targetDate = new Date("October 3, 2026 19:00:00").getTime();
