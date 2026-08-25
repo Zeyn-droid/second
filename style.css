@@ -30,6 +30,7 @@ body {
   position: relative;
   height: 90vh;
   min-height: 550px;
+  /* Красивое фоновое фото рук с кольцами */
   background: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
   display: flex;
   align-items: center;
@@ -215,6 +216,7 @@ body {
   justify-content: center;
 }
 
+/* Обведенная дата 3 октября */
 .wedding-day {
   border: 1px dashed #b38e46;
   border-radius: 50%;
