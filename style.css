@@ -1,21 +1,29 @@
-/* Дөңгелек айналмалы музыка батырмасы */
-.music-disc-btn {
+/* Музыка плеерінің виджеті */
+.music-player-widget {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 50px;
-  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  z-index: 1000;
+}
+
+/* Дөңгелек нота батырмасы */
+.music-disc-btn {
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: linear-gradient(135deg, #b38e46, #d4af37);
-  color: white;
-  border: 2px solid #fff;
-  font-size: 1.4rem;
+  color: #fff;
+  border: 2px solid #ffffff;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
   outline: none;
   transition: transform 0.2s ease;
 }
@@ -24,7 +32,7 @@
   transform: scale(0.9);
 }
 
-/* Айналу анимациясы */
+/* Қосылғанда айналатын анимация */
 .music-disc-btn.spinning {
   animation: spin 3s linear infinite;
 }
@@ -32,4 +40,23 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Ән аты жазылатын блок */
+.song-title {
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  max-width: 180px;
+  text-align: right;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+/* Музыка ойнағанда ән аты көрінеді */
+.song-title.show {
+  opacity: 1;
 }
