@@ -4,19 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Салауат & Аида Тойға шақыру</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 <body>
 
-  <!-- Әнді файл атына сәйкестендіріп қойыңыз (мысалы: music.mp3) -->
-  <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
-
-  <div class="music-player-widget">
-    <button id="musicToggle" class="music-disc-btn" title="Музыка">🎵</button>
-    <div class="song-title" id="songTitle">Miras Zhugunusov feat. Kazybek Kuraiysh — Ashypyn</div>
-  </div>
+  <!-- Айналмалы дөңгелек музыка батырмасы -->
+  <button id="musicToggle" class="music-disc-btn" title="Музыканы қосу/өшіру">
+    🎵
+  </button>
+  <audio id="bgMusic" src="miras-zhugunusov-feat.-kazybek-kuraiysh-ashypyn.mp3" loop></audio>
 
   <div class="container">
+    
+    <!-- Шақыру мәтіні -->
     <section class="invitation-card">
       <h2 class="title">Құрметті</h2>
       <p class="subtitle">
@@ -37,21 +37,15 @@
         <p class="event-date">03.10.2026</p>
         <p class="event-time">Уақыты: 19:00</p>
       </div>
-
-      <div class="address-section">
-        <h3 class="address-title">Мекенжайы:</h3>
-        <p class="address-text">«Алтын Сарай» мейрамханасы</p>
-      </div>
-
-      <p class="share-text">Бізбен бірге қуанышымызды бөлісіңіз!</p>
-
-      <div class="hosts-section">
-        <p class="hosts-title">Той Иелері:</p>
-        <p class="host-name">Әжесі Мерузия</p>
-        <p class="host-parents">Біржан & Әлия</p>
-      </div>
     </section>
 
+    <!-- Мекенжайы -->
+    <section class="info-card">
+      <h3>Мекенжайы:</h3>
+      <p>«Алтын Сарай» мейрамханасы</p>
+    </section>
+
+    <!-- Таймер -->
     <section class="timer-card">
       <h3>Тойдың басталуына қалды:</h3>
       <div id="timer" class="timer-grid">
@@ -62,6 +56,7 @@
       </div>
     </section>
 
+    <!-- Форма -->
     <section class="form-card">
       <h3>Тойға келетініңізді растаңыз</h3>
       <p class="form-sub">Өтініш, 2026 жылдың 20 қыркүйегіне дейін жауап берсеңіздер</p>
@@ -81,41 +76,65 @@
         <button type="submit">Жауапты жіберу</button>
       </form>
     </section>
+
   </div>
 
   <script>
+    // Таймер
+    const targetDate = new Date("October 3, 2026 19:00:00").getTime();
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference < 0) {
+        clearInterval(countdown);
+        document.getElementById("timer").innerHTML = "<p>Той басталды!</p>";
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+      document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+      document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+      document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+    }, 1000);
+
+    // Музыка басқару логикасы
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicToggle');
-    const songTitle = document.getElementById('songTitle');
 
-    musicBtn.addEventListener('click', function() {
-      if (music.paused) {
-        music.play().then(() => {
-          musicBtn.classList.add('spinning');
-          songTitle.classList.add('show');
-        }).catch(err => {
-          alert("Музыка файлы табылмады немесе жүктелмеді! GitHub-та музыка файлының атын тексеріңіз.");
-          console.error(err);
-        });
-      } else {
+    let isPlaying = false;
+
+    function toggleMusic() {
+      if (isPlaying) {
         music.pause();
         musicBtn.classList.remove('spinning');
-        songTitle.classList.remove('show');
+        musicBtn.innerHTML = '🎵';
+      } else {
+        music.play().then(() => {
+          musicBtn.classList.add('spinning');
+          musicBtn.innerHTML = '🎶';
+        }).catch(e => console.log("Автоплей тоқтатылды"));
       }
+      isPlaying = !isPlaying;
+    }
+
+    musicBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMusic();
     });
 
-    const targetDate = new Date("October 3, 2026 19:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
-
-      if (diff < 0) return;
-
-      document.getElementById("days").innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
-      document.getElementById("hours").innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-      document.getElementById("minutes").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-      document.getElementById("seconds").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
-    }, 1000);
+    // Экранды бірінші рет түрткенде автоматты қосылуы үшін
+    document.body.addEventListener('click', () => {
+      if (!isPlaying) {
+        toggleMusic();
+      }
+    }, { once: true });
   </script>
 
 </body>
