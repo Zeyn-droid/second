@@ -10,7 +10,43 @@ body {
   color: #333;
   display: flex;
   justify-content: center;
-  padding: 20px 10px;
+  padding: 30px 10px;
+}
+
+/* Дөңгелек айналмалы музыка батырмасы */
+.music-disc-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b38e46, #d4af37);
+  color: white;
+  border: 2px solid #fff;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  outline: none;
+  transition: transform 0.2s ease;
+}
+
+.music-disc-btn:active {
+  transform: scale(0.9);
+}
+
+/* Айналу анимациясы */
+.music-disc-btn.spinning {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .container {
@@ -22,7 +58,7 @@ body {
   text-align: center;
 }
 
-.invitation-card, .timer-card, .form-card {
+.invitation-card, .info-card, .timer-card, .form-card {
   background: #ffffff;
   padding: 25px 20px;
   border-radius: 15px;
@@ -47,23 +83,16 @@ body {
   font-size: 1.1rem;
   line-height: 1.6;
   color: #222;
-  margin-bottom: 15px;
-  font-weight: normal;
-}
-
-.main-text strong {
-  font-weight: bold;
-  color: #000;
+  margin-bottom: 20px;
 }
 
 .event-details {
   border-top: 1px dashed #e2d7c5;
-  border-bottom: 1px dashed #e2d7c5;
-  padding: 15px 0;
-  margin: 15px 0;
+  padding-top: 15px;
+  margin-top: 10px;
 }
 
-.event-title, .address-title {
+.event-title {
   font-size: 1.4rem;
   font-family: Georgia, serif;
   color: #b38e46;
@@ -72,6 +101,7 @@ body {
 
 .event-date {
   font-size: 1.6rem;
+  font-weight: bold;
   letter-spacing: 2px;
   color: #333;
   margin-bottom: 3px;
@@ -80,44 +110,6 @@ body {
 .event-time {
   font-size: 1.1rem;
   color: #666;
-}
-
-.address-section {
-  margin: 15px 0;
-  padding-bottom: 15px;
-  border-bottom: 1px dashed #e2d7c5;
-}
-
-.address-text {
-  font-size: 1.15rem;
-  color: #333;
-}
-
-.share-text {
-  font-size: 1.15rem;
-  font-style: italic;
-  color: #b38e46;
-  margin: 15px 0 10px 0;
-}
-
-.hosts-section {
-  margin: 10px 0 5px 0;
-  padding: 12px;
-  background: #fbf8f1;
-  border: 1px solid #e2d7c5;
-  border-radius: 10px;
-}
-
-.hosts-title {
-  color: #b38e46;
-  font-size: 1.1rem;
-  margin-bottom: 5px;
-}
-
-.host-name, .host-parents {
-  font-size: 1.05rem;
-  color: #333;
-  margin-top: 3px;
 }
 
 h3 {
@@ -144,6 +136,7 @@ h3 {
 .time-box span {
   display: block;
   font-size: 1.4rem;
+  font-weight: bold;
   color: #b38e46;
 }
 
@@ -172,64 +165,23 @@ textarea {
   resize: vertical;
 }
 
-button {
+button[type="submit"] {
   background-color: #b38e46;
   color: white;
   border: none;
   padding: 14px;
   border-radius: 8px;
   font-size: 1.1rem;
+  font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
-.music-player-widget {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-  z-index: 1000;
+button[type="submit"]:hover {
+  background-color: #967435;
 }
 
-.music-disc-btn {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #b38e46, #d4af37);
-  color: #fff;
-  border: 2px solid #ffffff;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-  outline: none;
-}
-
-.music-disc-btn.spinning {
-  animation: spin 3s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.song-title {
-  background: rgba(0, 0, 0, 0.75);
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  max-width: 180px;
-  text-align: right;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.song-title.show {
-  opacity: 1;
+.form-sub {
+  font-size: 0.9rem;
+  color: #666;
 }
