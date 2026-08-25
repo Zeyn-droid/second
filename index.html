@@ -8,7 +8,7 @@
   <!-- Шрифттер -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- AOS Библиотекасы -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -19,6 +19,7 @@
   <!-- Аудио плеер -->
   <audio id="bgMusic" src="miras-zhugunusov-feat.-kazybek-kuraiysh-ashypyn.mp3" loop></audio>
 
+  <!-- Главный контейнер (Отцентрирован для ПК и смартфонов) -->
   <div class="main-wrapper">
 
     <!-- 1. Басты экран (Hero) -->
@@ -27,21 +28,21 @@
       <div class="hero-overlay"></div>
       
       <div class="hero-content">
-        <p class="top-date" data-aos="fade-down" data-aos-duration="1000">03.10.2026</p>
+        <p class="top-date" data-aos="fade-down" data-aos-duration="1200">03.10.2026</p>
         
-        <h1 class="couple-names" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
-          САЛАУАТ<br><span>&</span><br>АИДА
+        <h1 class="couple-names" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200">
+          САЛАУАТ<br><span class="and-symbol">&</span><br>АИДА
         </h1>
         
         <!-- Виниловый плеер -->
-        <div class="player-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+        <div class="player-container" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
           <button id="musicToggle" class="vinyl-disc" title="Музыканы қосу/өшіру">
             <span class="disc-center"></span>
           </button>
         </div>
         
-        <!-- Кнопка "бастау" -->
-        <div id="scrollBtn" class="scroll-down-hint" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+        <!-- Кнопка медленного скролла "бастау" -->
+        <div id="scrollBtn" class="scroll-down-hint" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600">
           <span>бастау</span>
           <div class="arrow-down">∨</div>
         </div>
@@ -49,8 +50,8 @@
     </header>
 
     <!-- 2. Шақыру мәтіні -->
-    <section id="invitationSection" class="content-card invitation-section" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-heading">Құрметті</h2>
+    <section id="invitationSection" class="content-card invitation-section" data-aos="fade-up" data-aos-duration="1200">
+      <h2 class="script-heading glow-text">Құрметті</h2>
       <p class="guest-categories">
         АҒАЙЫН-ТУЫС, БАУЫРЛАР,<br>
         ҚҰДА-ЖЕКЖАТ,<br>
@@ -74,18 +75,18 @@
       </p>
     </section>
 
-    <!-- 3. Блок «ҚАШАН БОЛАДЫ?» (Спецэффект) -->
-    <section class="content-card event-date-card" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-heading">Той қашан өтеді?</h2>
+    <!-- 3. Блок «ҚАШАН БОЛАДЫ?» -->
+    <section class="content-card event-date-card" data-aos="fade-up" data-aos-duration="1200">
+      <h2 class="script-heading glow-text">Той қашан өтеді?</h2>
       <div class="date-badge-wrapper">
-        <div class="date-badge">
+        <div class="date-badge hover-lift">
           <div class="badge-icon">📅</div>
           <div class="badge-text">
             <span class="badge-day">3 Қазан</span>
             <span class="badge-year">2026 жыл</span>
           </div>
         </div>
-        <div class="date-badge">
+        <div class="date-badge hover-lift">
           <div class="badge-icon">⏰</div>
           <div class="badge-text">
             <span class="badge-day">Басталуы</span>
@@ -95,11 +96,11 @@
       </div>
     </section>
 
-    <!-- 4. КҮННӘМА (КАЛЕНДАРЬ МЕН СПЕЦЭФФЕКТ) -->
-    <section class="content-card calendar-section" data-aos="fade-up" data-aos-duration="1000">
+    <!-- 4. КҮННӘМА (СПЕЦЭФФЕКТИВТІ КАЛЕНДАРЬ) -->
+    <section class="content-card calendar-section" data-aos="fade-up" data-aos-duration="1200">
       <div class="calendar-header">
         <span class="sparkle-icon">✨</span>
-        <h2 class="script-month">Қазан 2026</h2>
+        <h2 class="script-month glow-gold-text">Қазан 2026</h2>
         <span class="sparkle-icon">✨</span>
       </div>
 
@@ -116,7 +117,7 @@
           <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div>
           <div class="day">1</div><div class="day">2</div>
           
-          <!-- Главный день с эффектом кольца и пульсации -->
+          <!-- Главный день с супер-эффектом -->
           <div class="day wedding-day" id="weddingDay">
             <span class="day-num">3</span>
             <span class="wedding-ring">💍</span>
@@ -138,41 +139,41 @@
     </section>
 
     <!-- 5. ТАЙМЕР -->
-    <section class="content-card timer-card" data-aos="fade-up" data-aos-duration="1000">
+    <section class="content-card timer-card" data-aos="fade-up" data-aos-duration="1200">
       <div class="timer-bg-overlay"></div>
       <div class="timer-content">
         <h2 class="timer-title">ТОЙ САЛТАНАТЫНА ДЕЙІН:</h2>
         <div class="timer-grid" id="timer">
-          <div class="time-box"><span id="days">00</span><small>КҮН</small></div>
-          <div class="time-box"><span id="hours">00</span><small>САҒАТ</small></div>
-          <div class="time-box"><span id="minutes">00</span><small>МИНУТ</small></div>
-          <div class="time-box"><span id="seconds">00</span><small>СЕКУНД</small></div>
+          <div class="time-box hover-lift"><span id="days">00</span><small>КҮН</small></div>
+          <div class="time-box hover-lift"><span id="hours">00</span><small>САҒАТ</small></div>
+          <div class="time-box hover-lift"><span id="minutes">00</span><small>МИНУТ</small></div>
+          <div class="time-box hover-lift"><span id="seconds">00</span><small>СЕКУНД</small></div>
         </div>
       </div>
     </section>
 
     <!-- 6. МЕКЕН-ЖАЙЫ -->
-    <section class="content-card location-section" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-heading">Мекен-жайымыз:</h2>
+    <section class="content-card location-section" data-aos="fade-up" data-aos-duration="1200">
+      <h2 class="script-heading glow-text">Мекен-жайымыз:</h2>
       <p class="city-name">ҚҰЛСАРЫ ҚАЛАСЫ</p>
       <p class="venue-name">«АЛТЫН САРАЙ»<br>МЕЙРАМХАНАСЫ</p>
       
-      <div class="venue-image">
+      <div class="venue-image hover-lift">
         <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Мейрамхана">
       </div>
 
-      <a href="https://2gis.kz/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button">2GIS КАРТАНЫ АШУ</a>
+      <a href="https://2gis.kz/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button hover-lift">2GIS КАРТАНЫ АШУ</a>
     </section>
 
     <!-- 7. ТОЙ ИЕЛЕРІ -->
-    <section class="content-card hosts-card" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-heading">Той иелері:</h2>
+    <section class="content-card hosts-card" data-aos="fade-up" data-aos-duration="1200">
+      <h2 class="script-heading glow-text">Той иелері:</h2>
       <p class="host-names">Әжесі Мерузия<br>Біржан & Әлия</p>
     </section>
 
     <!-- 8. ФОРМА -->
-    <section class="content-card rsvp-section" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-heading">Сауалнама:</h2>
+    <section class="content-card rsvp-section" data-aos="fade-up" data-aos-duration="1200">
+      <h2 class="script-heading glow-text">Сауалнама:</h2>
       <p class="rsvp-title">ТОЙҒА КЕЛУІҢІЗДІ РАСТАУЫҢЫЗДЫ СҰРАЙМЫЗ</p>
       <p class="rsvp-sub">Аты-жөніңіз (жұбыңызбен келетін болсаңыз, екеуіңіздің де атыңызды жазуыңызды өтінеміз)</p>
 
@@ -194,13 +195,13 @@
           </label>
         </div>
 
-        <button type="submit" class="submit-btn">Жіберу</button>
+        <button type="submit" class="submit-btn hover-lift">Жіберу</button>
       </form>
     </section>
 
     <!-- 9. ФУТЕР -->
     <footer class="content-card footer-section">
-      <h2 class="script-footer">Қадірлі қонағымыз болыңыздар!</h2>
+      <h2 class="script-footer glow-gold-text">Қадірлі қонағымыз болыңыздар!</h2>
     </footer>
 
   </div>
@@ -208,9 +209,45 @@
   <!-- AOS JS -->
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    AOS.init({ once: true, duration: 800, easing: 'ease-out' });
+    AOS.init({ once: true, duration: 1000, easing: 'ease-out' });
 
-    // 1. Блестки на фоне Canvas
+    // 1. Медленный плавающий скролл (Кастомная функция плавной анимации)
+    function smoothScrollTo(targetPosition, duration) {
+      const startPosition = window.pageYOffset || document.documentElement.scrollTop;
+      const distance = targetPosition - startPosition;
+      let startTime = null;
+
+      function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+      }
+
+      // Функция замедления в начале и конце
+      function easeInOutCubic(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t * t + b;
+        t -= 2;
+        return c / 2 * (t * t * t + 2) + b;
+      }
+
+      requestAnimationFrame(animation);
+    }
+
+    const scrollBtn = document.getElementById('scrollBtn');
+    const invitationSection = document.getElementById('invitationSection');
+
+    if (scrollBtn && invitationSection) {
+      scrollBtn.addEventListener('click', () => {
+        const targetOffset = invitationSection.offsetTop;
+        // 2200 миллисекунд (2.2 секунды) = ОЧЕНЬ медленный и красивый скролл
+        smoothScrollTo(targetOffset, 2200);
+      });
+    }
+
+    // 2. Блестки на фоне Canvas
     const canvas = document.getElementById('sparklesCanvas');
     if (canvas) {
       const ctx = canvas.getContext('2d');
@@ -228,10 +265,10 @@
         reset() {
           this.x = Math.random() * canvas.width;
           this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2 + 0.5;
-          this.speedY = Math.random() * 0.7 + 0.2;
+          this.size = Math.random() * 2.5 + 0.5;
+          this.speedY = Math.random() * 0.5 + 0.2;
           this.opacity = Math.random();
-          this.fade = Math.random() * 0.015 + 0.005;
+          this.fade = Math.random() * 0.01 + 0.003;
         }
         update() {
           this.y += this.speedY;
@@ -250,7 +287,7 @@
         }
       }
 
-      for (let i = 0; i < 35; i++) particles.push(new Particle());
+      for (let i = 0; i < 45; i++) particles.push(new Particle());
 
       function animateSparkles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -260,7 +297,7 @@
       animateSparkles();
     }
 
-    // 2. Музыка
+    // 3. Музыка
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicToggle');
     let isPlaying = false;
@@ -281,16 +318,6 @@
     }
     document.body.addEventListener('click', () => { if (!isPlaying) toggleMusic(); }, { once: true });
 
-    // 3. Плавный скролл при клике на "БАСТАУ"
-    const scrollBtn = document.getElementById('scrollBtn');
-    const invitationSection = document.getElementById('invitationSection');
-
-    if (scrollBtn && invitationSection) {
-      scrollBtn.addEventListener('click', () => {
-        invitationSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    }
-
     // 4. Таймер
     const targetDate = new Date("October 3, 2026 19:00:00").getTime();
     setInterval(() => {
@@ -303,6 +330,9 @@
       document.getElementById("minutes").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
       document.getElementById("seconds").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
     }, 1000);
+  </script>
+</body>
+</html>
   </script>
 </body>
 </html>
