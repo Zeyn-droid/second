@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Салауат & Аида — Тойға шақыру</title>
+  <!-- Подключение шрифтов -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,7 +13,7 @@
 <body>
 
   <!-- Аудио плеер -->
-  <audio id="bgMusic" src="miras-zhugunusov-feat.-kazybek-kuraiysh-ashypyn.mp3" loop preload="auto"></audio>
+  <audio id="bgMusic" src="miras-zhugunusov-feat.-kazybek-kuraiysh-ashypyn.mp3" loop></audio>
 
   <div class="main-wrapper">
 
@@ -25,12 +26,11 @@
         
         <!-- Кнопка плеера -->
         <div class="player-container">
-          <button id="musicToggle" class="vinyl-disc" type="button" title="Музыканы қосу/өшіру">
+          <button id="musicToggle" class="vinyl-disc" title="Музыканы қосу/өшіру">
             <span class="disc-center"></span>
           </button>
         </div>
         
-        <!-- Кнопка скролла -->
         <div id="scrollBtn" class="scroll-down-hint">
           <span>бастау</span>
           <div class="arrow-down">∨</div>
@@ -39,7 +39,7 @@
     </header>
 
     <!-- 2. Шақыру мәтіні -->
-    <section id="invitation" class="content-card invitation-section">
+    <section id="invitationSection" class="content-card invitation-section">
       <h2 class="script-heading">Құрметті</h2>
       <p class="guest-categories">
         АҒАЙЫН-ТУЫС, БАУЫРЛАР,<br>
@@ -76,6 +76,7 @@
         <div class="day-name">СЕН</div>
         <div class="day-name">ЖЕК</div>
 
+        <!-- Дни месяца (октябрь 2026) -->
         <div class="day"></div><div class="day"></div><div class="day"></div>
         <div class="day">1</div><div class="day">2</div>
         <div class="day wedding-day">3</div><div class="day">4</div>
@@ -134,7 +135,8 @@
         <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Мейрамхана">
       </div>
 
-      <a href="https://2giskz.app/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button">КАРТАНЫ АШУ</a>
+      <!-- Исправленная прямая ссылка 2GIS -->
+      <a href="https://2gis.kz/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button">КАРТАНЫ АШУ</a>
     </section>
 
     <!-- 7. Той иелері -->
@@ -179,63 +181,58 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // 1. Скролл кнопка "бастау"
-      const scrollBtn = document.getElementById('scrollBtn');
-      const targetSection = document.getElementById('invitation');
+    // 1. Плеер и проигрывание
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicToggle');
+    let isPlaying = false;
 
-      if (scrollBtn && targetSection) {
-        scrollBtn.addEventListener('click', function() {
-          targetSection.scrollIntoView({ behavior: 'smooth' });
-        });
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+        musicBtn.classList.remove('spinning');
+      } else {
+        music.play().then(() => {
+          musicBtn.classList.add('spinning');
+        }).catch(err => console.log("Автоплей бұғатталды:", err));
       }
+      isPlaying = !isPlaying;
+    }
 
-      // 2. Включение музыки и анимация пластинки
-      const music = document.getElementById('bgMusic');
-      const musicBtn = document.getElementById('musicToggle');
-      let isPlaying = false;
-
-      if (musicBtn && music) {
-        musicBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          if (isPlaying) {
-            music.pause();
-            musicBtn.classList.remove('spinning');
-            isPlaying = false;
-          } else {
-            music.play().then(() => {
-              musicBtn.classList.add('spinning');
-              isPlaying = true;
-            }).catch(err => console.log(err));
-          }
-        });
-      }
-
-      // 3. Обратный отсчет
-      const targetDate = new Date("October 3, 2026 19:00:00").getTime();
-
-      function updateTimer() {
-        const now = new Date().getTime();
-        const diff = targetDate - now;
-
-        if (diff < 0) return;
-
-        const d = document.getElementById("days");
-        const h = document.getElementById("hours");
-        const m = document.getElementById("minutes");
-        const s = document.getElementById("seconds");
-
-        if (d && h && m && s) {
-          d.innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
-          h.innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-          m.innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-          s.innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
-        }
-      }
-
-      setInterval(updateTimer, 1000);
-      updateTimer();
+    musicBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMusic();
     });
+
+    // Первый клик по экрану запускает музыку
+    document.body.addEventListener('click', () => {
+      if (!isPlaying) {
+        toggleMusic();
+      }
+    }, { once: true });
+
+    // Клик по кнопке скролла "бастау"
+    const scrollBtn = document.getElementById('scrollBtn');
+    const invSection = document.getElementById('invitationSection');
+    if (scrollBtn && invSection) {
+      scrollBtn.addEventListener('click', () => {
+        invSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    // 2. Таймер
+    const targetDate = new Date("October 3, 2026 19:00:00").getTime();
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff < 0) return;
+
+      document.getElementById("days").innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+      document.getElementById("hours").innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+    }, 1000);
   </script>
 </body>
 </html>
