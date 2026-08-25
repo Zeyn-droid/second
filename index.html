@@ -4,15 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Салауат & Аида Тойға шақыру</title>
-  <link rel="stylesheet" href="style.css?v=6.0">
+  <link rel="stylesheet" href="style.css?v=8.0">
 </head>
 <body>
-
-  <!-- Айналмалы музыка батырмасы -->
-  <button id="musicToggle" class="music-disc-btn" title="Музыканы қосу/өшіру">
-    🎵
-  </button>
-  <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
 
   <div class="container">
     
@@ -32,18 +26,20 @@
         шақырамыз!
       </p>
 
-      <p class="share-text">Бізбен бірге қуанышымызды бөлісіңіз!</p>
-
-      <div class="hosts-section">
-        <p class="hosts-title">Той Иелері:</p>
-        <p class="host-name">Әжесі Мерузия</p>
-        <p class="host-parents">Біржан & Әлия</p>
-      </div>
-
+      <!-- Той Салтанаты -->
       <div class="event-details">
         <h3 class="event-title">Той Салтанаты</h3>
         <p class="event-date">03.10.2026</p>
         <p class="event-time">Уақыты: 19:00</p>
+      </div>
+
+      <p class="share-text">Бізбен бірге қуанышымызды бөлісіңіз!</p>
+
+      <!-- Той Иелері -->
+      <div class="hosts-section">
+        <p class="hosts-title">Той Иелері:</p>
+        <p class="host-name">Әжесі Мерузия</p>
+        <p class="host-parents">Біржан & Әлия</p>
       </div>
     </section>
 
@@ -111,43 +107,6 @@
       document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
       document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
     }, 1000);
-
-    // Музыка басқару
-    const music = document.getElementById('bgMusic');
-    const musicBtn = document.getElementById('musicToggle');
-    let isPlaying = false;
-
-    function playMusic() {
-      music.play().then(() => {
-        isPlaying = true;
-        musicBtn.classList.add('spinning');
-        musicBtn.innerHTML = '🎶';
-      }).catch(e => {
-        console.log("Автоплейге рұқсат берілген жоқ");
-      });
-    }
-
-    function stopMusic() {
-      music.pause();
-      isPlaying = false;
-      musicBtn.classList.remove('spinning');
-      musicBtn.innerHTML = '🎵';
-    }
-
-    musicBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (isPlaying) {
-        stopMusic();
-      } else {
-        playMusic();
-      }
-    });
-
-    document.addEventListener('click', () => {
-      if (!isPlaying) {
-        playMusic();
-      }
-    }, { once: true });
   </script>
 
 </body>
