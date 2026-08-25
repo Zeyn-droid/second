@@ -1,4 +1,187 @@
-/* Музыка плеерінің виджеті */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #fdfbf7;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 20px 10px;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  text-align: center;
+}
+
+.invitation-card, .timer-card, .form-card {
+  background: #ffffff;
+  padding: 25px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.title {
+  font-size: 2rem;
+  font-family: Georgia, serif;
+  color: #b38e46;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.main-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #222;
+  margin-bottom: 15px;
+  font-weight: normal;
+}
+
+.main-text strong {
+  font-weight: bold;
+  color: #000;
+}
+
+.event-details {
+  border-top: 1px dashed #e2d7c5;
+  border-bottom: 1px dashed #e2d7c5;
+  padding: 15px 0;
+  margin: 15px 0;
+}
+
+.event-title, .address-title {
+  font-size: 1.4rem;
+  font-family: Georgia, serif;
+  color: #b38e46;
+  margin-bottom: 5px;
+}
+
+.event-date {
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.event-time {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.address-section {
+  margin: 15px 0;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #e2d7c5;
+}
+
+.address-text {
+  font-size: 1.15rem;
+  color: #333;
+}
+
+.share-text {
+  font-size: 1.15rem;
+  font-style: italic;
+  color: #b38e46;
+  margin: 15px 0 10px 0;
+}
+
+.hosts-section {
+  margin: 10px 0 5px 0;
+  padding: 12px;
+  background: #fbf8f1;
+  border: 1px solid #e2d7c5;
+  border-radius: 10px;
+}
+
+.hosts-title {
+  color: #b38e46;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.host-name, .host-parents {
+  font-size: 1.05rem;
+  color: #333;
+  margin-top: 3px;
+}
+
+h3 {
+  font-size: 1.3rem;
+  color: #b38e46;
+  margin-bottom: 12px;
+}
+
+.timer-grid {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.time-box {
+  background: #fbf8f1;
+  border: 1px solid #e2d7c5;
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 65px;
+}
+
+.time-box span {
+  display: block;
+  font-size: 1.4rem;
+  color: #b38e46;
+}
+
+.time-box small {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+button {
+  background-color: #b38e46;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
 .music-player-widget {
   position: fixed;
   top: 20px;
@@ -10,7 +193,6 @@
   z-index: 1000;
 }
 
-/* Дөңгелек нота батырмасы */
 .music-disc-btn {
   width: 52px;
   height: 52px;
@@ -25,14 +207,8 @@
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
   outline: none;
-  transition: transform 0.2s ease;
 }
 
-.music-disc-btn:active {
-  transform: scale(0.9);
-}
-
-/* Қосылғанда айналатын анимация */
 .music-disc-btn.spinning {
   animation: spin 3s linear infinite;
 }
@@ -42,7 +218,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Ән аты жазылатын блок */
 .song-title {
   background: rgba(0, 0, 0, 0.75);
   color: #fff;
@@ -53,10 +228,8 @@
   text-align: right;
   opacity: 0;
   transition: opacity 0.4s ease;
-  pointer-events: none;
 }
 
-/* Музыка ойнағанда ән аты көрінеді */
 .song-title.show {
   opacity: 1;
 }
