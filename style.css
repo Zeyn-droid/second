@@ -4,31 +4,45 @@
   padding: 0;
 }
 
+/* ФОН ДЛЯ ПК: Премиум темный фоновый цвет с мягкой текстурой */
 body {
-  background-color: #0d0d0d;
+  background: #0a0a0c;
   color: #333;
   font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
+/* МОБИЛЬНЫЙ ФРЕЙМ / КАРТОЧКА (Идеально фиксирует ширину и на ПК и на смартфонах) */
 .main-wrapper {
   width: 100%;
-  max-width: 430px;
+  max-width: 440px;
   background-color: #ffffff;
   min-height: 100vh;
-  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  box-shadow: 0 0 50px rgba(212, 175, 55, 0.15), 0 0 100px rgba(0,0,0,0.9);
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
 
-/* HERO */
+/* ЭФФЕКТЫ ПОДНЯТИЯ ПРИ НАВЕДЕНИИ (Hover Lift) */
+.hover-lift {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.25);
+}
+
+/* HERO SECTION */
 .hero-card {
   position: relative;
   height: 100vh;
-  min-height: 550px;
+  min-height: 600px;
   background: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
   display: flex;
   align-items: center;
@@ -47,7 +61,7 @@ body {
 .hero-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.75) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.85) 100%);
   z-index: 2;
 }
 
@@ -58,35 +72,38 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  width: 100%;
 }
 
 .top-date {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
-  letter-spacing: 5px;
+  font-size: 1.6rem;
+  letter-spacing: 6px;
   color: #d4af37;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .couple-names {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2.8rem;
+  font-size: 3rem;
   font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 5px;
+  line-height: 1.25;
+  letter-spacing: 6px;
   margin: 15px 0;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.6);
 }
 
-.couple-names span {
+.and-symbol {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-style: italic;
   color: #d4af37;
 }
 
-/* Винил */
+/* ВИНИЛОВЫЙ ДИСК С ЭФФЕКТАМИ */
 .vinyl-disc {
-  width: 70px;
-  height: 70px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   background: radial-gradient(circle, #333 20%, #111 21%, #111 40%, #222 41%, #111 70%);
   border: 3px solid rgba(212, 175, 55, 0.9);
@@ -94,35 +111,50 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-  margin-top: 10px;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+  margin-top: 15px;
+  transition: transform 0.3s;
+}
+
+.vinyl-disc:hover {
+  transform: scale(1.08);
 }
 
 .disc-center {
-  width: 20px; height: 20px;
+  width: 22px; height: 22px;
   background: #fff;
   border-radius: 50%;
   border: 4px solid #b38e46;
 }
 
 .vinyl-disc.spinning {
-  animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite, goldPulse 2s infinite alternate;
 }
 
 @keyframes spin {
   100% { transform: rotate(360deg); }
 }
 
-/* Кнопка бастау */
+@keyframes goldPulse {
+  0% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+  100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.9); }
+}
+
+/* КНОПКА "БАСТАУ" */
 .scroll-down-hint {
-  margin-top: 25px;
-  font-size: 0.85rem;
-  letter-spacing: 4px;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  letter-spacing: 5px;
   cursor: pointer;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.scroll-down-hint:hover {
+  transform: scale(1.05);
 }
 
 .arrow-down {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-top: 5px;
   color: #d4af37;
   animation: bounce 2s infinite;
@@ -130,30 +162,36 @@ body {
 
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-8px); }
-  60% { transform: translateY(-4px); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
 }
 
-/* СЕКЦИИ */
+/* СЕКЦИИ КОНТЕНТА */
 .content-card {
-  padding: 45px 25px;
+  padding: 50px 25px;
   text-align: center;
-  border-bottom: 1px solid #f2efea;
+  border-bottom: 1px solid #f5efea;
   background: #ffffff;
 }
 
 .script-heading {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   font-weight: 400;
   color: #2c2c2c;
   margin-bottom: 20px;
 }
 
+.glow-gold-text {
+  background: linear-gradient(45deg, #b38e46, #ffd700, #b38e46);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .guest-categories {
   font-size: 0.85rem;
-  line-height: 2;
+  line-height: 2.1;
   letter-spacing: 2px;
   color: #555;
   margin-bottom: 25px;
@@ -161,13 +199,14 @@ body {
 
 .invite-label {
   font-size: 0.85rem;
-  letter-spacing: 4px;
+  letter-spacing: 5px;
   color: #a38f67;
   margin-bottom: 15px;
+  font-weight: 600;
 }
 
 .hosts-detail {
-  font-size: 0.95rem;
+  font-size: 1rem;
   letter-spacing: 1px;
   margin-bottom: 25px;
   line-height: 1.8;
@@ -176,7 +215,7 @@ body {
 .highlight-script {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   color: #b38e46;
 }
 
@@ -185,10 +224,10 @@ body {
   line-height: 2;
   letter-spacing: 2px;
   color: #333;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* БЛОК "ҚАШАН ӨТЕДІ?" */
+/* "ҚАШАН БОЛАДЫ?" БЛОК */
 .date-badge-wrapper {
   display: flex;
   justify-content: center;
@@ -197,18 +236,18 @@ body {
 }
 
 .date-badge {
-  background: #faf8f5;
-  border: 1px solid #e2d7c5;
-  border-radius: 12px;
-  padding: 12px 18px;
+  background: #faf7f2;
+  border: 1px solid #e5d8c3;
+  border-radius: 14px;
+  padding: 14px 18px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  gap: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
 }
 
 .badge-icon {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 .badge-text {
@@ -219,7 +258,7 @@ body {
 
 .badge-day {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #222;
 }
 
@@ -233,50 +272,52 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
 .sparkle-icon {
-  font-size: 1.2rem;
-  animation: pulse 1.5s infinite alternate;
+  font-size: 1.3rem;
+  animation: pulseSparkle 1.5s infinite alternate;
+}
+
+@keyframes pulseSparkle {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.3); opacity: 1; }
 }
 
 .script-month {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 2.5rem;
-  background: linear-gradient(45deg, #1a2b3c, #b38e46);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 2.6rem;
 }
 
 .calendar-container {
-  background: #fff8f0;
-  border-radius: 16px;
-  padding: 20px 15px;
-  border: 1px solid #ebdcc5;
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.12);
+  background: linear-gradient(145deg, #fffcf7, #f7efe3);
+  border-radius: 20px;
+  padding: 22px 15px;
+  border: 1px solid #e8d7be;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 6px;
-  max-width: 320px;
+  max-width: 330px;
   margin: 0 auto;
 }
 
 .day-name {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #a38f67;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 }
 
 .day {
   font-size: 0.9rem;
-  padding: 8px 0;
+  padding: 9px 0;
   color: #444;
   display: flex;
   align-items: center;
@@ -285,51 +326,53 @@ body {
   border-radius: 50%;
 }
 
-/* СПЕЦЭФФЕКТ ДЛЯ ДНЯ СВАДЬБЫ (3 ОКТЯБРЯ) */
+/* ДЕНЬ СВАДЬБЫ (3 ОКТЯБРЯ) - СУПЕР СПЕЦЭФФЕКТЫ */
 .wedding-day {
-  background: linear-gradient(135deg, #d4af37, #b38e46);
+  background: linear-gradient(135deg, #ffd700, #b38e46);
   color: #fff !important;
   font-weight: 700;
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
-  animation: goldGlow 2s infinite ease-in-out;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.9);
+  animation: megaGoldGlow 1.8s infinite ease-in-out;
   cursor: pointer;
 }
 
 .wedding-ring {
   position: absolute;
-  top: -8px;
-  right: -5px;
-  font-size: 0.75rem;
+  top: -10px;
+  right: -6px;
+  font-size: 0.85rem;
   animation: bounce 1.5s infinite;
 }
 
 .tooltip {
   visibility: hidden;
   position: absolute;
-  bottom: 115%;
+  bottom: 120%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #111;
+  background-color: #1a1a1a;
   color: #fff;
   text-align: center;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.65rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
   white-space: nowrap;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 .wedding-day:hover .tooltip, .wedding-day:active .tooltip {
   visibility: visible;
   opacity: 1;
+  transform: translateX(-50%) translateY(-3px);
 }
 
-@keyframes goldGlow {
-  0% { transform: scale(1); box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
-  50% { transform: scale(1.15); box-shadow: 0 0 20px rgba(212, 175, 55, 0.9); }
-  100% { transform: scale(1); box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+@keyframes megaGoldGlow {
+  0% { transform: scale(1); box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); }
+  50% { transform: scale(1.18); box-shadow: 0 0 25px rgba(255, 215, 0, 1); }
+  100% { transform: scale(1); box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); }
 }
 
 /* ТАЙМЕР */
@@ -337,13 +380,13 @@ body {
   position: relative;
   background: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
   color: #fff;
-  padding: 50px 20px;
+  padding: 55px 20px;
 }
 
 .timer-bg-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
 }
 
 .timer-content {
@@ -353,8 +396,8 @@ body {
 
 .timer-title {
   font-size: 0.85rem;
-  letter-spacing: 3px;
-  margin-bottom: 20px;
+  letter-spacing: 4px;
+  margin-bottom: 22px;
   color: #d4af37;
 }
 
@@ -365,25 +408,26 @@ body {
 }
 
 .time-box {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 10px 6px;
-  border-radius: 8px;
-  min-width: 60px;
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(5px);
+  padding: 12px 8px;
+  border-radius: 10px;
+  min-width: 65px;
+  border: 1px solid rgba(255,255,255,0.25);
 }
 
 .time-box span {
   display: block;
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  font-weight: 600;
 }
 
 .time-box small {
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 1px;
 }
 
-/* ЛОКАЦИЯ */
+/* МЕКЕН-ЖАЙЫ */
 .city-name {
   font-size: 0.8rem;
   letter-spacing: 3px;
@@ -392,19 +436,20 @@ body {
 }
 
 .venue-name {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   letter-spacing: 2px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   line-height: 1.4;
 }
 
 .venue-image {
   width: 100%;
-  height: 200px;
-  border-radius: 10px;
+  height: 210px;
+  border-radius: 14px;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 .venue-image img {
@@ -416,8 +461,8 @@ body {
   display: inline-block;
   background: #111;
   color: #fff;
-  padding: 14px 30px;
-  border-radius: 6px;
+  padding: 15px 32px;
+  border-radius: 8px;
   text-decoration: none;
   font-size: 0.8rem;
   letter-spacing: 2px;
@@ -425,14 +470,14 @@ body {
 
 /* ТОЙ ИЕЛЕРІ */
 .host-names {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   line-height: 1.8;
   color: #444;
 }
 
-/* RSVP */
+/* RSVP САУАЛНАМА */
 .rsvp-title {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   letter-spacing: 2px;
   font-weight: 600;
   margin-bottom: 10px;
@@ -442,29 +487,34 @@ body {
   font-size: 0.75rem;
   color: #777;
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .rsvp-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .rsvp-form input[type="text"] {
   width: 100%;
-  padding: 14px;
+  padding: 15px;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 0.85rem;
   outline: none;
   background: #fafafa;
+  transition: border-color 0.3s;
+}
+
+.rsvp-form input[type="text"]:focus {
+  border-color: #b38e46;
 }
 
 .radio-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   text-align: left;
   margin: 10px 0;
 }
@@ -482,9 +532,9 @@ body {
   background: #111;
   color: #fff;
   border: none;
-  padding: 14px;
-  border-radius: 6px;
-  font-size: 0.8rem;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 0.85rem;
   letter-spacing: 2px;
   cursor: pointer;
 }
@@ -493,6 +543,9 @@ body {
 .script-footer {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
+  font-size: 2.4rem;
+  font-weight: 400;
+}
   font-size: 2.2rem;
   color: #b38e46;
   font-weight: 400;
