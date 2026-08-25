@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #121212;
   color: #333;
@@ -12,9 +16,9 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Общий контейнер во весь экран мобилки */
 .main-wrapper {
   width: 100%;
   max-width: 430px;
@@ -23,9 +27,10 @@ body {
   box-shadow: 0 0 30px rgba(0,0,0,0.5);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-/* 1. HERO SECTION */
+/* HERO SECTION */
 .hero-card {
   position: relative;
   height: 90vh;
@@ -73,7 +78,7 @@ body {
   font-style: italic;
 }
 
-/* Виниловый плеер */
+/* Винил */
 .vinyl-disc {
   width: 70px;
   height: 70px;
@@ -87,6 +92,11 @@ body {
   justify-content: center;
   box-shadow: 0 5px 20px rgba(0,0,0,0.4);
   margin-top: 15px;
+  transition: transform 0.3s ease;
+}
+
+.vinyl-disc:active {
+  transform: scale(0.95);
 }
 
 .disc-center {
@@ -111,6 +121,7 @@ body {
   letter-spacing: 3px;
   text-transform: lowercase;
   opacity: 0.8;
+  cursor: pointer;
 }
 
 .arrow-down {
@@ -125,7 +136,7 @@ body {
   60% { transform: translateY(-4px); }
 }
 
-/* Общие стили для секций */
+/* Секции */
 .content-card {
   padding: 40px 25px;
   text-align: center;
@@ -142,7 +153,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* 2. ШАҚЫРУ МӘТІНІ */
+/* Текст шақыру */
 .guest-categories {
   font-size: 0.85rem;
   line-height: 2;
@@ -182,7 +193,7 @@ body {
   font-weight: 500;
 }
 
-/* 3. КАЛЕНДАРЬ */
+/* Календарь */
 .script-month {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
@@ -221,9 +232,16 @@ body {
   color: #b38e46;
   font-weight: 600;
   position: relative;
+  animation: pulse 2s infinite;
 }
 
-/* 4. ТАЙМЛАЙН */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Таймлайн */
 .timeline {
   display: flex;
   flex-direction: column;
@@ -263,7 +281,7 @@ body {
   background: #e0d7c6;
 }
 
-/* 5. ТАЙМЕР */
+/* Таймер */
 .timer-card {
   position: relative;
   background: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
@@ -316,7 +334,7 @@ body {
   opacity: 0.8;
 }
 
-/* 6. ЛОКАЦИЯ */
+/* Локация */
 .city-name {
   font-size: 0.85rem;
   letter-spacing: 3px;
@@ -344,6 +362,11 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.venue-image img:hover {
+  transform: scale(1.05);
 }
 
 .map-button {
@@ -355,10 +378,14 @@ body {
   text-decoration: none;
   font-size: 0.8rem;
   letter-spacing: 2px;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
 
-/* 7. ТОЙ ИЕЛЕРІ */
+.map-button:hover {
+  background: #b38e46;
+}
+
+/* Той иелері */
 .host-names {
   font-size: 1.1rem;
   line-height: 1.8;
@@ -366,7 +393,7 @@ body {
   letter-spacing: 1px;
 }
 
-/* 8. RSVP ФОРМА */
+/* RSVP */
 .rsvp-title {
   font-size: 0.85rem;
   letter-spacing: 2px;
@@ -395,6 +422,11 @@ body {
   font-size: 0.9rem;
   outline: none;
   background: #fafafa;
+  transition: border 0.3s;
+}
+
+.rsvp-form input[type="text"]:focus {
+  border-color: #b38e46;
 }
 
 .radio-group {
@@ -423,9 +455,14 @@ body {
   font-size: 0.85rem;
   letter-spacing: 2px;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
-/* 9. ФУТЕР */
+.submit-btn:hover {
+  background: #b38e46;
+}
+
+/* Футер */
 .script-footer {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
