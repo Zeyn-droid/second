@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   
-  <!-- AOS Анимация библиотекасы (CSS) -->
+  <!-- AOS Библиотекасы -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="stylesheet" href="style.css">
 </head>
@@ -21,24 +21,27 @@
 
   <div class="main-wrapper">
 
-    <!-- 1. Главная карточка (Hero Section) -->
+    <!-- 1. Басты экран (Hero) -->
     <header class="hero-card">
       <canvas id="sparklesCanvas"></canvas>
       <div class="hero-overlay"></div>
+      
       <div class="hero-content">
-        <p class="top-date" data-aos="fade-down" data-aos-duration="1200">03.10.2026</p>
-        <h1 class="couple-names" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200">
+        <p class="top-date" data-aos="fade-down" data-aos-duration="1000">03.10.2026</p>
+        
+        <h1 class="couple-names" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
           САЛАУАТ<br><span>&</span><br>АИДА
         </h1>
         
         <!-- Виниловый плеер -->
-        <div class="player-container" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
+        <div class="player-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
           <button id="musicToggle" class="vinyl-disc" title="Музыканы қосу/өшіру">
             <span class="disc-center"></span>
           </button>
         </div>
         
-        <div id="scrollBtn" class="scroll-down-hint" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600">
+        <!-- Кнопка "бастау" -->
+        <div id="scrollBtn" class="scroll-down-hint" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
           <span>бастау</span>
           <div class="arrow-down">∨</div>
         </div>
@@ -47,8 +50,8 @@
 
     <!-- 2. Шақыру мәтіні -->
     <section id="invitationSection" class="content-card invitation-section" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-heading" data-aos="fade-up">Құрметті</h2>
-      <p class="guest-categories" data-aos="fade-up" data-aos-delay="100">
+      <h2 class="script-heading">Құрметті</h2>
+      <p class="guest-categories">
         АҒАЙЫН-ТУЫС, БАУЫРЛАР,<br>
         ҚҰДА-ЖЕКЖАТ,<br>
         НАҒАШЫ-ЖИЕН, БӨЛЕЛЕР,<br>
@@ -56,14 +59,14 @@
         МЕН ӘРІПТЕСТЕР!
       </p>
       
-      <p class="invite-label" data-aos="fade-up" data-aos-delay="200">СІЗДЕРДІ</p>
+      <p class="invite-label">СІЗДЕРДІ</p>
       
-      <p class="hosts-detail" data-aos="fade-up" data-aos-delay="300">
+      <p class="hosts-detail">
         баламыз <span class="highlight-script">Салауат</span> пен<br>
         келініміз <span class="highlight-script">Аиданың</span>
       </p>
 
-      <p class="event-desc" data-aos="fade-up" data-aos-delay="400">
+      <p class="event-desc">
         ҮЙЛЕНУ ТОЙЫНА АРНАЛҒАН<br>
         АҚ ДАСТАРХАНЫМЫЗДЫҢ<br>
         ҚАДІРЛІ ҚОНАҒЫ БОЛУҒА<br>
@@ -71,58 +74,75 @@
       </p>
     </section>
 
-    <!-- 3. Календарь -->
+    <!-- 3. Блок «ҚАШАН БОЛАДЫ?» (Спецэффект) -->
+    <section class="content-card event-date-card" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="script-heading">Той қашан өтеді?</h2>
+      <div class="date-badge-wrapper">
+        <div class="date-badge">
+          <div class="badge-icon">📅</div>
+          <div class="badge-text">
+            <span class="badge-day">3 Қазан</span>
+            <span class="badge-year">2026 жыл</span>
+          </div>
+        </div>
+        <div class="date-badge">
+          <div class="badge-icon">⏰</div>
+          <div class="badge-text">
+            <span class="badge-day">Басталуы</span>
+            <span class="badge-year">Сағат 19:00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. КҮННӘМА (КАЛЕНДАРЬ МЕН СПЕЦЭФФЕКТ) -->
     <section class="content-card calendar-section" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-month" data-aos="zoom-in">Қазан</h2>
-      <div class="calendar-grid" data-aos="fade-up" data-aos-delay="200">
-        <div class="day-name">ДҮ</div>
-        <div class="day-name">СЕС</div>
-        <div class="day-name">СӘР</div>
-        <div class="day-name">БЕЙ</div>
-        <div class="day-name">ЖҰМ</div>
-        <div class="day-name">СЕН</div>
-        <div class="day-name">ЖЕК</div>
-
-        <div class="day"></div><div class="day"></div><div class="day"></div>
-        <div class="day">1</div><div class="day">2</div>
-        <div class="day wedding-day">3</div><div class="day">4</div>
-        <div class="day">5</div><div class="day">6</div><div class="day">7</div>
-        <div class="day">8</div><div class="day">9</div><div class="day">10</div>
-        <div class="day">11</div><div class="day">12</div><div class="day">13</div>
-        <div class="day">14</div><div class="day">15</div><div class="day">16</div>
-        <div class="day">17</div><div class="day">18</div><div class="day">19</div>
-        <div class="day">20</div><div class="day">21</div><div class="day">22</div>
-        <div class="day">23</div><div class="day">24</div><div class="day">25</div>
-        <div class="day">26</div><div class="day">27</div><div class="day">28</div>
-        <div class="day">29</div><div class="day">30</div><div class="day">31</div>
+      <div class="calendar-header">
+        <span class="sparkle-icon">✨</span>
+        <h2 class="script-month">Қазан 2026</h2>
+        <span class="sparkle-icon">✨</span>
       </div>
-    </section>
 
-    <!-- 4. Той бағдарламасы -->
-    <section class="content-card timeline-section" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-heading" data-aos="fade-up">Той бағдарламасы:</h2>
-      
-      <div class="timeline">
-        <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
-          <div class="timeline-heart">♥</div>
-          <div class="timeline-time">19:00</div>
-          <div class="timeline-text">Қонақтардың жиналуы</div>
-        </div>
-        <div class="timeline-line"></div>
-        <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
-          <div class="timeline-heart">♥</div>
-          <div class="timeline-time">19:30</div>
-          <div class="timeline-text">Тойдың басталуы</div>
+      <div class="calendar-container">
+        <div class="calendar-grid">
+          <div class="day-name">ДҮ</div>
+          <div class="day-name">СЕС</div>
+          <div class="day-name">СӘР</div>
+          <div class="day-name">БЕЙ</div>
+          <div class="day-name">ЖҰМ</div>
+          <div class="day-name">СЕН</div>
+          <div class="day-name">ЖЕК</div>
+
+          <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div>
+          <div class="day">1</div><div class="day">2</div>
+          
+          <!-- Главный день с эффектом кольца и пульсации -->
+          <div class="day wedding-day" id="weddingDay">
+            <span class="day-num">3</span>
+            <span class="wedding-ring">💍</span>
+            <span class="tooltip">Той күні! 🎉</span>
+          </div>
+
+          <div class="day">4</div><div class="day">5</div><div class="day">6</div>
+          <div class="day">7</div><div class="day">8</div><div class="day">9</div>
+          <div class="day">10</div><div class="day">11</div><div class="day">12</div>
+          <div class="day">13</div><div class="day">14</div><div class="day">15</div>
+          <div class="day">16</div><div class="day">17</div><div class="day">18</div>
+          <div class="day">19</div><div class="day">20</div><div class="day">21</div>
+          <div class="day">22</div><div class="day">23</div><div class="day">24</div>
+          <div class="day">25</div><div class="day">26</div><div class="day">27</div>
+          <div class="day">28</div><div class="day">29</div><div class="day">30</div>
+          <div class="day">31</div>
         </div>
       </div>
     </section>
 
-    <!-- 5. Таймер -->
-    <section class="content-card timer-card" data-aos="zoom-in" data-aos-duration="1000">
+    <!-- 5. ТАЙМЕР -->
+    <section class="content-card timer-card" data-aos="fade-up" data-aos-duration="1000">
       <div class="timer-bg-overlay"></div>
       <div class="timer-content">
-        <h2 class="timer-title" data-aos="fade-down">ТОЙ САЛТАНАТЫНА ДЕЙІН:</h2>
-        <div class="timer-grid" id="timer" data-aos="fade-up" data-aos-delay="200">
+        <h2 class="timer-title">ТОЙ САЛТАНАТЫНА ДЕЙІН:</h2>
+        <div class="timer-grid" id="timer">
           <div class="time-box"><span id="days">00</span><small>КҮН</small></div>
           <div class="time-box"><span id="hours">00</span><small>САҒАТ</small></div>
           <div class="time-box"><span id="minutes">00</span><small>МИНУТ</small></div>
@@ -131,32 +151,32 @@
       </div>
     </section>
 
-    <!-- 6. Мекен-жайы -->
+    <!-- 6. МЕКЕН-ЖАЙЫ -->
     <section class="content-card location-section" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-heading" data-aos="fade-up">Мекен-жайымыз:</h2>
-      <p class="city-name" data-aos="fade-up" data-aos-delay="100">ҚҰЛСАРЫ ҚАЛАСЫ</p>
-      <p class="venue-name" data-aos="fade-up" data-aos-delay="200">«АЛТЫН САРАЙ»<br>МЕЙРАМХАНАСЫ</p>
+      <h2 class="script-heading">Мекен-жайымыз:</h2>
+      <p class="city-name">ҚҰЛСАРЫ ҚАЛАСЫ</p>
+      <p class="venue-name">«АЛТЫН САРАЙ»<br>МЕЙРАМХАНАСЫ</p>
       
-      <div class="venue-image" data-aos="zoom-in" data-aos-delay="300">
+      <div class="venue-image">
         <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Мейрамхана">
       </div>
 
-      <a href="https://2gis.kz/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button" data-aos="fade-up" data-aos-delay="400">КАРТАНЫ АШУ</a>
+      <a href="https://2gis.kz/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button">2GIS КАРТАНЫ АШУ</a>
     </section>
 
-    <!-- 7. Той иелері -->
+    <!-- 7. ТОЙ ИЕЛЕРІ -->
     <section class="content-card hosts-card" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-heading" data-aos="fade-up">Той иелері:</h2>
-      <p class="host-names" data-aos="zoom-in" data-aos-delay="200">Әжесі Мерузия<br>Біржан & Әлия</p>
+      <h2 class="script-heading">Той иелері:</h2>
+      <p class="host-names">Әжесі Мерузия<br>Біржан & Әлия</p>
     </section>
 
-    <!-- 8. Форма подтверждения -->
+    <!-- 8. ФОРМА -->
     <section class="content-card rsvp-section" data-aos="fade-up" data-aos-duration="1000">
-      <h2 class="script-heading" data-aos="fade-up">Сауалнама:</h2>
-      <p class="rsvp-title" data-aos="fade-up" data-aos-delay="100">ТОЙҒА КЕЛУІҢІЗДІ РАСТАУЫҢЫЗДЫ СҰРАЙМЫЗ</p>
-      <p class="rsvp-sub" data-aos="fade-up" data-aos-delay="200">Аты-жөніңіз (жұбыңызбен келетін болсаңыз, екеуіңіздің де атыңызды жазуыңызды өтінеміз)</p>
+      <h2 class="script-heading">Сауалнама:</h2>
+      <p class="rsvp-title">ТОЙҒА КЕЛУІҢІЗДІ РАСТАУЫҢЫЗДЫ СҰРАЙМЫЗ</p>
+      <p class="rsvp-sub">Аты-жөніңіз (жұбыңызбен келетін болсаңыз, екеуіңіздің де атыңызды жазуыңызды өтінеміз)</p>
 
-      <form action="https://formspree.io/f/mvkpjzbb" method="POST" class="rsvp-form" data-aos="fade-up" data-aos-delay="300">
+      <form action="https://formspree.io/f/mvkpjzbb" method="POST" class="rsvp-form">
         <input type="text" name="guest_names" placeholder="Аты-жөніңіз..." required>
 
         <div class="radio-group">
@@ -178,8 +198,8 @@
       </form>
     </section>
 
-    <!-- 9. Футер -->
-    <footer class="content-card footer-section" data-aos="zoom-in" data-aos-duration="1000">
+    <!-- 9. ФУТЕР -->
+    <footer class="content-card footer-section">
       <h2 class="script-footer">Қадірлі қонағымыз болыңыздар!</h2>
     </footer>
 
@@ -188,132 +208,90 @@
   <!-- AOS JS -->
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    // 1. Анимации AOS
-    AOS.init({
-      once: true, 
-      duration: 1000, 
-      easing: 'ease-out-cubic'
-    });
+    AOS.init({ once: true, duration: 800, easing: 'ease-out' });
 
-    // 2. Золотые блёстки на главном экране (Sparkles Effect)
+    // 1. Блестки на фоне Canvas
     const canvas = document.getElementById('sparklesCanvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let particles = [];
 
-    function resizeCanvas() {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+      function resizeCanvas() {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
 
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2.5 + 0.5;
-        this.speedY = Math.random() * 0.8 + 0.2;
-        this.opacity = Math.random();
-        this.fade = Math.random() * 0.02 + 0.005;
-      }
-      update() {
-        this.y += this.speedY;
-        this.opacity -= this.fade;
-        if (this.y > canvas.height || this.opacity <= 0) {
-          this.reset();
-          this.y = 0;
-          this.opacity = 1;
+      class Particle {
+        constructor() { this.reset(); }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 2 + 0.5;
+          this.speedY = Math.random() * 0.7 + 0.2;
+          this.opacity = Math.random();
+          this.fade = Math.random() * 0.015 + 0.005;
+        }
+        update() {
+          this.y += this.speedY;
+          this.opacity -= this.fade;
+          if (this.y > canvas.height || this.opacity <= 0) {
+            this.reset();
+            this.y = 0;
+            this.opacity = 1;
+          }
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+          ctx.fill();
         }
       }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = '#d4af37';
-        ctx.fill();
+
+      for (let i = 0; i < 35; i++) particles.push(new Particle());
+
+      function animateSparkles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animateSparkles);
       }
+      animateSparkles();
     }
 
-    for (let i = 0; i < 45; i++) {
-      particles.push(new Particle());
-    }
-
-    function animateSparkles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateSparkles);
-    }
-    animateSparkles();
-
-    // 3. Музыка
+    // 2. Музыка
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicToggle');
     let isPlaying = false;
 
     function toggleMusic() {
+      if (!music || !musicBtn) return;
       if (isPlaying) {
         music.pause();
         musicBtn.classList.remove('spinning');
       } else {
-        music.play().then(() => {
-          musicBtn.classList.add('spinning');
-        }).catch(err => console.log("Автоплей:", err));
+        music.play().then(() => musicBtn.classList.add('spinning')).catch(e => console.log(e));
       }
       isPlaying = !isPlaying;
     }
 
-    musicBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMusic();
-    });
-
-    document.body.addEventListener('click', () => {
-      if (!isPlaying) {
-        toggleMusic();
-      }
-    }, { once: true });
-
-    // 4. МЕДЛЕННЫЙ ПЛАВНЫЙ СКРОЛЛ ОТ НАЧАЛА ДО КОНЦА (4.5 секунды)
-    function smoothScrollToBottom(durationMs) {
-      const startPosition = window.pageYOffset || document.documentElement.scrollTop;
-      const targetPosition = document.documentElement.scrollHeight - window.innerHeight;
-      const distance = targetPosition - startPosition;
-      let startTime = null;
-
-      // Функция плавности (Ease-In-Out CUBIC)
-      function easeInOutCubic(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t * t + b;
-        t -= 2;
-        return c / 2 * (t * t * t + 2) + b;
-      }
-
-      function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const run = easeInOutCubic(timeElapsed, startPosition, distance, durationMs);
-        window.scrollTo(0, run);
-        if (timeElapsed < durationMs) requestAnimationFrame(animation);
-      }
-
-      requestAnimationFrame(animation);
+    if (musicBtn) {
+      musicBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleMusic(); });
     }
+    document.body.addEventListener('click', () => { if (!isPlaying) toggleMusic(); }, { once: true });
 
+    // 3. Плавный скролл при клике на "БАСТАУ"
     const scrollBtn = document.getElementById('scrollBtn');
-    if (scrollBtn) {
+    const invitationSection = document.getElementById('invitationSection');
+
+    if (scrollBtn && invitationSection) {
       scrollBtn.addEventListener('click', () => {
-        smoothScrollToBottom(4500); // 4.5 секунды
+        invitationSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
 
-    // 5. Таймер
+    // 4. Таймер
     const targetDate = new Date("October 3, 2026 19:00:00").getTime();
     setInterval(() => {
       const now = new Date().getTime();
