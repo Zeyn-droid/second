@@ -4,52 +4,42 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  background-color: #0b0b0b;
+  background-color: #0d0d0d;
   color: #333;
   font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 .main-wrapper {
   width: 100%;
   max-width: 430px;
-  background-color: #faf9f6;
+  background-color: #ffffff;
   min-height: 100vh;
-  box-shadow: 0 0 50px rgba(0,0,0,0.8);
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
-/* HERO SECTION */
+/* HERO */
 .hero-card {
   position: relative;
   height: 100vh;
-  min-height: 600px;
+  min-height: 550px;
   background: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: #fff;
-  overflow: hidden;
 }
 
 #sparklesCanvas {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none;
   z-index: 1;
 }
@@ -57,17 +47,17 @@ body {
 .hero-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
-  z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.75) 100%);
+  z-index: 2;
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  padding: 20px;
 }
 
 .top-date {
@@ -75,49 +65,41 @@ body {
   font-size: 1.5rem;
   letter-spacing: 5px;
   color: #d4af37;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .couple-names {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-weight: 400;
   line-height: 1.2;
-  letter-spacing: 6px;
-  text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+  letter-spacing: 5px;
+  margin: 15px 0;
 }
 
 .couple-names span {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-style: italic;
   color: #d4af37;
 }
 
-/* Виниловый плеер */
+/* Винил */
 .vinyl-disc {
-  width: 75px;
-  height: 75px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background: radial-gradient(circle, #333 20%, #111 21%, #111 40%, #222 41%, #111 70%);
-  border: 3px solid rgba(212, 175, 55, 0.8);
-  position: relative;
+  border: 3px solid rgba(212, 175, 55, 0.9);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-  margin-top: 15px;
-  transition: transform 0.3s ease;
-}
-
-.vinyl-disc:active {
-  transform: scale(0.9);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  margin-top: 10px;
 }
 
 .disc-center {
-  width: 22px;
-  height: 22px;
+  width: 20px; height: 20px;
   background: #fff;
   border-radius: 50%;
   border: 4px solid #b38e46;
@@ -131,22 +113,16 @@ body {
   100% { transform: rotate(360deg); }
 }
 
+/* Кнопка бастау */
 .scroll-down-hint {
-  margin-top: 30px;
+  margin-top: 25px;
   font-size: 0.85rem;
   letter-spacing: 4px;
-  text-transform: lowercase;
-  opacity: 0.9;
   cursor: pointer;
-  transition: color 0.3s;
-}
-
-.scroll-down-hint:hover {
-  color: #d4af37;
 }
 
 .arrow-down {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-top: 5px;
   color: #d4af37;
   animation: bounce 2s infinite;
@@ -154,46 +130,44 @@ body {
 
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
 }
 
 /* СЕКЦИИ */
 .content-card {
   padding: 45px 25px;
   text-align: center;
-  border-bottom: 1px solid #f0ece1;
-  background: #fff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  border-bottom: 1px solid #f2efea;
+  background: #ffffff;
 }
 
 .script-heading {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 400;
   color: #2c2c2c;
   margin-bottom: 20px;
 }
 
-/* Текст шақыру */
 .guest-categories {
   font-size: 0.85rem;
-  line-height: 2.1;
+  line-height: 2;
   letter-spacing: 2px;
   color: #555;
   margin-bottom: 25px;
 }
 
 .invite-label {
-  font-size: 0.9rem;
-  letter-spacing: 5px;
+  font-size: 0.85rem;
+  letter-spacing: 4px;
   color: #a38f67;
   margin-bottom: 15px;
 }
 
 .hosts-detail {
-  font-size: 1rem;
+  font-size: 0.95rem;
   letter-spacing: 1px;
   margin-bottom: 25px;
   line-height: 1.8;
@@ -202,33 +176,93 @@ body {
 .highlight-script {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 2.2rem;
+  font-size: 2.1rem;
   color: #b38e46;
-  display: inline-block;
-  margin: 0 5px;
 }
 
 .event-desc {
   font-size: 0.85rem;
-  line-height: 2.1;
+  line-height: 2;
   letter-spacing: 2px;
   color: #333;
   font-weight: 500;
 }
 
-/* Календарь */
+/* БЛОК "ҚАШАН ӨТЕДІ?" */
+.date-badge-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.date-badge {
+  background: #faf8f5;
+  border: 1px solid #e2d7c5;
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.badge-icon {
+  font-size: 1.4rem;
+}
+
+.badge-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.badge-day {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #222;
+}
+
+.badge-year {
+  font-size: 0.75rem;
+  color: #b38e46;
+}
+
+/* КАЛЕНДАРЬ СО СПЕЦЭФФЕКТАМИ */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.sparkle-icon {
+  font-size: 1.2rem;
+  animation: pulse 1.5s infinite alternate;
+}
+
 .script-month {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 2.7rem;
-  color: #1a2b3c;
-  margin-bottom: 15px;
+  font-size: 2.5rem;
+  background: linear-gradient(45deg, #1a2b3c, #b38e46);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.calendar-container {
+  background: #fff8f0;
+  border-radius: 16px;
+  padding: 20px 15px;
+  border: 1px solid #ebdcc5;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.12);
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  gap: 6px;
   max-width: 320px;
   margin: 0 auto;
 }
@@ -236,80 +270,74 @@ body {
 .day-name {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #aaa;
-  padding-bottom: 10px;
+  color: #a38f67;
+  padding-bottom: 8px;
 }
 
 .day {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   padding: 8px 0;
   color: #444;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.wedding-day {
-  border: 1.5px dashed #b38e46;
+  position: relative;
   border-radius: 50%;
-  color: #b38e46;
-  font-weight: 600;
-  box-shadow: 0 0 10px rgba(179, 142, 70, 0.3);
-  animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.12); }
-  100% { transform: scale(1); }
+/* СПЕЦЭФФЕКТ ДЛЯ ДНЯ СВАДЬБЫ (3 ОКТЯБРЯ) */
+.wedding-day {
+  background: linear-gradient(135deg, #d4af37, #b38e46);
+  color: #fff !important;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+  animation: goldGlow 2s infinite ease-in-out;
+  cursor: pointer;
 }
 
-/* Таймлайн */
-.timeline {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  margin-top: 20px;
+.wedding-ring {
+  position: absolute;
+  top: -8px;
+  right: -5px;
+  font-size: 0.75rem;
+  animation: bounce 1.5s infinite;
 }
 
-.timeline-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
 }
 
-.timeline-heart {
-  color: #b38e46;
-  font-size: 1.2rem;
-  margin-bottom: 5px;
+.wedding-day:hover .tooltip, .wedding-day:active .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 
-.timeline-time {
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: #2c2c2c;
+@keyframes goldGlow {
+  0% { transform: scale(1); box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+  50% { transform: scale(1.15); box-shadow: 0 0 20px rgba(212, 175, 55, 0.9); }
+  100% { transform: scale(1); box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
 }
 
-.timeline-text {
-  font-size: 0.85rem;
-  color: #666;
-  letter-spacing: 1px;
-  margin-top: 3px;
-}
-
-.timeline-line {
-  width: 1px;
-  height: 45px;
-  background: linear-gradient(180deg, #b38e46, #e0d7c6);
-}
-
-/* Таймер */
+/* ТАЙМЕР */
 .timer-card {
   position: relative;
   background: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
   color: #fff;
-  padding: 55px 20px;
+  padding: 50px 20px;
 }
 
 .timer-bg-overlay {
@@ -324,113 +352,94 @@ body {
 }
 
 .timer-title {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   letter-spacing: 3px;
-  margin-bottom: 25px;
-  font-weight: 400;
+  margin-bottom: 20px;
   color: #d4af37;
 }
 
 .timer-grid {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .time-box {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  padding: 12px 8px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px 6px;
   border-radius: 8px;
-  min-width: 65px;
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  min-width: 60px;
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .time-box span {
   display: block;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 500;
 }
 
 .time-box small {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   letter-spacing: 1px;
-  opacity: 0.8;
 }
 
-/* Локация */
+/* ЛОКАЦИЯ */
 .city-name {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 3px;
   color: #888;
   margin-bottom: 5px;
 }
 
 .venue-name {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   letter-spacing: 2px;
   font-weight: 600;
   margin-bottom: 20px;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .venue-image {
   width: 100%;
-  height: 210px;
-  border-radius: 12px;
+  height: 200px;
+  border-radius: 10px;
   overflow: hidden;
   margin-bottom: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .venue-image img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.venue-image img:hover {
-  transform: scale(1.08);
 }
 
 .map-button {
   display: inline-block;
   background: #111;
   color: #fff;
-  padding: 14px 32px;
+  padding: 14px 30px;
   border-radius: 6px;
   text-decoration: none;
   font-size: 0.8rem;
   letter-spacing: 2px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  transition: all 0.3s;
 }
 
-.map-button:hover {
-  background: #b38e46;
-  box-shadow: 0 4px 20px rgba(179, 142, 70, 0.4);
-}
-
-/* Той иелері */
+/* ТОЙ ИЕЛЕРІ */
 .host-names {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   line-height: 1.8;
   color: #444;
-  letter-spacing: 1px;
 }
 
 /* RSVP */
 .rsvp-title {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 2px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 .rsvp-sub {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #777;
   line-height: 1.5;
   margin-bottom: 20px;
@@ -439,7 +448,7 @@ body {
 .rsvp-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 .rsvp-form input[type="text"] {
@@ -447,20 +456,15 @@ body {
   padding: 14px;
   border: 1px solid #ddd;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   outline: none;
   background: #fafafa;
-  transition: border 0.3s;
-}
-
-.rsvp-form input[type="text"]:focus {
-  border-color: #b38e46;
 }
 
 .radio-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   text-align: left;
   margin: 10px 0;
 }
@@ -478,24 +482,18 @@ body {
   background: #111;
   color: #fff;
   border: none;
-  padding: 15px;
+  padding: 14px;
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 2px;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  transition: background 0.3s;
 }
 
-.submit-btn:hover {
-  background: #b38e46;
-}
-
-/* Футер */
+/* ФУТЕР */
 .script-footer {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 2.3rem;
+  font-size: 2.2rem;
   color: #b38e46;
   font-weight: 400;
 }
