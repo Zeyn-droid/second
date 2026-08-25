@@ -4,17 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Салауат & Аида Тойға шақыру</title>
-  <link rel="stylesheet" href="style.css?v=8.0">
+  <link rel="stylesheet" href="style.css?v=9.0">
 </head>
 <body>
 
-  <!-- Фондық музыка (Audio tag) -->
-  <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
+  <!-- Фондық музыка (әннің файлы: miras-ashypyn.mp3) -->
+  <audio id="bgMusic" src="miras-ashypyn.mp3" loop preload="auto"></audio>
 
-  <!-- Айналмалы музыка батырмасы -->
-  <button id="musicToggle" class="music-disc-btn" title="Музыканы қосу/өшіру">
-    🎵
-  </button>
+  <!-- Музыка блогы: Дөңгелек батырма + Ән атауы -->
+  <div class="music-player-widget">
+    <button id="musicToggle" class="music-disc-btn" title="Музыканы қосу/өшіру">
+      🎵
+    </button>
+    <div class="song-title" id="songTitle">
+      Miras Zhugunusov feat. Kazybek Kuraiysh — Ashypyn
+    </div>
+  </div>
 
   <div class="container">
     
@@ -92,16 +97,16 @@
   </div>
 
   <script>
-    // Музыканы басқару скрипті
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicToggle');
+    const songTitle = document.getElementById('songTitle');
     let isPlaying = false;
 
     function playMusic() {
       music.play().then(() => {
         isPlaying = true;
         musicBtn.classList.add('spinning');
-        musicBtn.innerHTML = '🎶';
+        songTitle.classList.add('show');
       }).catch(e => {
         console.log("Автоплей бұғатталды");
       });
@@ -111,7 +116,7 @@
       music.pause();
       isPlaying = false;
       musicBtn.classList.remove('spinning');
-      musicBtn.innerHTML = '🎵';
+      songTitle.classList.remove('show');
     }
 
     musicBtn.addEventListener('click', (e) => {
@@ -123,6 +128,7 @@
       }
     });
 
+    // Экранды алғаш рет түрткенде музыканы автоматты қосу
     document.addEventListener('click', () => {
       if (!isPlaying) {
         playMusic();
