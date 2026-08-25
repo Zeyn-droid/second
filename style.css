@@ -4,10 +4,6 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background-color: #121212;
   color: #333;
@@ -115,7 +111,6 @@ body {
   letter-spacing: 3px;
   text-transform: lowercase;
   opacity: 0.8;
-  cursor: pointer;
 }
 
 .arrow-down {
