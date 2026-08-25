@@ -187,13 +187,14 @@
   <!-- Библиотека анимаций AOS (JS) -->
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    // Инициализация анимаций при скролле
-    AOS.init({
-      once: true, // Анимация срабатывает красиво 1 раз при прокрутке
-      duration: 800, // Длительность 0.8 секунд
-      easing: 'ease-out-cubic'
-    });
-
+    // Скролл по кнопке "бастау"
+    const scrollBtn = document.getElementById('scrollBtn');
+    const invSection = document.getElementById('invitationSection');
+    if (scrollBtn && invSection) {
+      scrollBtn.addEventListener('click', () => {
+        invSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
     // Плеер
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicToggle');
