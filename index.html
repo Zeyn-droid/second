@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Библиотека анимаций AOS (CSS) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,17 +25,19 @@
     <header class="hero-card">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <p class="top-date">03.10.2026</p>
-        <h1 class="couple-names">САЛАУАТ<br><span>&</span><br>АИДА</h1>
+        <p class="top-date" data-aos="fade-down" data-aos-duration="1000">03.10.2026</p>
+        <h1 class="couple-names" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
+          САЛАУАТ<br><span>&</span><br>АИДА
+        </h1>
         
         <!-- Кнопка плеера -->
-        <div class="player-container">
+        <div class="player-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
           <button id="musicToggle" class="vinyl-disc" title="Музыканы қосу/өшіру">
             <span class="disc-center"></span>
           </button>
         </div>
         
-        <div class="scroll-down-hint">
+        <div id="scrollBtn" class="scroll-down-hint" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
           <span>бастау</span>
           <div class="arrow-down">∨</div>
         </div>
@@ -39,9 +45,9 @@
     </header>
 
     <!-- 2. Шақыру мәтіні -->
-    <section class="content-card invitation-section">
-      <h2 class="script-heading">Құрметті</h2>
-      <p class="guest-categories">
+    <section id="invitationSection" class="content-card invitation-section" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="script-heading" data-aos="fade-up">Құрметті</h2>
+      <p class="guest-categories" data-aos="fade-up" data-aos-delay="100">
         АҒАЙЫН-ТУЫС, БАУЫРЛАР,<br>
         ҚҰДА-ЖЕКЖАТ,<br>
         НАҒАШЫ-ЖИЕН, БӨЛЕЛЕР,<br>
@@ -49,14 +55,14 @@
         МЕН ӘРІПТЕСТЕР!
       </p>
       
-      <p class="invite-label">СІЗДЕРДІ</p>
+      <p class="invite-label" data-aos="fade-up" data-aos-delay="200">СІЗДЕРДІ</p>
       
-      <p class="hosts-detail">
+      <p class="hosts-detail" data-aos="fade-up" data-aos-delay="300">
         баламыз <span class="highlight-script">Салауат</span> пен<br>
         келініміз <span class="highlight-script">Аиданың</span>
       </p>
 
-      <p class="event-desc">
+      <p class="event-desc" data-aos="fade-up" data-aos-delay="400">
         ҮЙЛЕНУ ТОЙЫНА АРНАЛҒАН<br>
         АҚ ДАСТАРХАНЫМЫЗДЫҢ<br>
         ҚАДІРЛІ ҚОНАҒЫ БОЛУҒА<br>
@@ -65,9 +71,9 @@
     </section>
 
     <!-- 3. Календарь -->
-    <section class="content-card calendar-section">
-      <h2 class="script-month">Қазан</h2>
-      <div class="calendar-grid">
+    <section class="content-card calendar-section" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="script-month" data-aos="zoom-in">Қазан</h2>
+      <div class="calendar-grid" data-aos="fade-up" data-aos-delay="200">
         <div class="day-name">ДҮ</div>
         <div class="day-name">СЕС</div>
         <div class="day-name">СӘР</div>
@@ -76,7 +82,6 @@
         <div class="day-name">СЕН</div>
         <div class="day-name">ЖЕК</div>
 
-        <!-- Дни месяца (октябрь 2026) -->
         <div class="day"></div><div class="day"></div><div class="day"></div>
         <div class="day">1</div><div class="day">2</div>
         <div class="day wedding-day">3</div><div class="day">4</div>
@@ -92,18 +97,18 @@
       </div>
     </section>
 
-    <!-- 4. Той бағдарламасы (Timeline) -->
-    <section class="content-card timeline-section">
-      <h2 class="script-heading">Той бағдарламасы:</h2>
+    <!-- 4. Той бағдарламасы -->
+    <section class="content-card timeline-section" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="script-heading" data-aos="fade-up">Той бағдарламасы:</h2>
       
       <div class="timeline">
-        <div class="timeline-item">
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
           <div class="timeline-heart">♥</div>
           <div class="timeline-time">19:00</div>
           <div class="timeline-text">Қонақтардың жиналуы</div>
         </div>
         <div class="timeline-line"></div>
-        <div class="timeline-item">
+        <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
           <div class="timeline-heart">♥</div>
           <div class="timeline-time">19:30</div>
           <div class="timeline-text">Тойдың басталуы</div>
@@ -111,12 +116,12 @@
       </div>
     </section>
 
-    <!-- 5. Обратный отсчет (Timer) -->
-    <section class="content-card timer-card">
+    <!-- 5. Таймер -->
+    <section class="content-card timer-card" data-aos="zoom-in" data-aos-duration="1000">
       <div class="timer-bg-overlay"></div>
       <div class="timer-content">
-        <h2 class="timer-title">ТОЙ САЛТАНАТЫНА ДЕЙІН:</h2>
-        <div class="timer-grid" id="timer">
+        <h2 class="timer-title" data-aos="fade-down">ТОЙ САЛТАНАТЫНА ДЕЙІН:</h2>
+        <div class="timer-grid" id="timer" data-aos="fade-up" data-aos-delay="200">
           <div class="time-box"><span id="days">00</span><small>КҮН</small></div>
           <div class="time-box"><span id="hours">00</span><small>САҒАТ</small></div>
           <div class="time-box"><span id="minutes">00</span><small>МИНУТ</small></div>
@@ -126,32 +131,31 @@
     </section>
 
     <!-- 6. Мекен-жайы -->
-    <section class="content-card location-section">
-      <h2 class="script-heading">Мекен-жайымыз:</h2>
-      <p class="city-name">ҚҰЛСАРЫ ҚАЛАСЫ</p>
-      <p class="venue-name">«АЛТЫН САРАЙ»<br>МЕЙРАМХАНАСЫ</p>
+    <section class="content-card location-section" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="script-heading" data-aos="fade-up">Мекен-жайымыз:</h2>
+      <p class="city-name" data-aos="fade-up" data-aos-delay="100">ҚҰЛСАРЫ ҚАЛАСЫ</p>
+      <p class="venue-name" data-aos="fade-up" data-aos-delay="200">«АЛТЫН САРАЙ»<br>МЕЙРАМХАНАСЫ</p>
       
-      <div class="venue-image">
+      <div class="venue-image" data-aos="zoom-in" data-aos-delay="300">
         <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Мейрамхана">
       </div>
 
-      <!-- Ссылка на 2GIS -->
-      <a href="https://2giskz.app/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button">КАРТАНЫ АШУ</a>
+      <a href="https://2gis.kz/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button" data-aos="fade-up" data-aos-delay="400">КАРТАНЫ АШУ</a>
     </section>
 
     <!-- 7. Той иелері -->
-    <section class="content-card hosts-card">
-      <h2 class="script-heading">Той иелері:</h2>
-      <p class="host-names">Әжесі Мерузия<br>Біржан & Әлия</p>
+    <section class="content-card hosts-card" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="script-heading" data-aos="fade-up">Той иелері:</h2>
+      <p class="host-names" data-aos="zoom-in" data-aos-delay="200">Әжесі Мерузия<br>Біржан & Әлия</p>
     </section>
 
-    <!-- 8. Форма подтверждения (RSVP) -->
-    <section class="content-card rsvp-section">
-      <h2 class="script-heading">Сауалнама:</h2>
-      <p class="rsvp-title">ТОЙҒА КЕЛУІҢІЗДІ РАСТАУЫҢЫЗДЫ СҰРАЙМЫЗ</p>
-      <p class="rsvp-sub">Аты-жөніңіз (жұбыңызбен келетін болсаңыз, екеуіңіздің де атыңызды жазуыңызды өтінеміз)</p>
+    <!-- 8. Форма подтверждения -->
+    <section class="content-card rsvp-section" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="script-heading" data-aos="fade-up">Сауалнама:</h2>
+      <p class="rsvp-title" data-aos="fade-up" data-aos-delay="100">ТОЙҒА КЕЛУІҢІЗДІ РАСТАУЫҢЫЗДЫ СҰРАЙМЫЗ</p>
+      <p class="rsvp-sub" data-aos="fade-up" data-aos-delay="200">Аты-жөніңіз (жұбыңызбен келетін болсаңыз, екеуіңіздің де атыңызды жазуыңызды өтінеміз)</p>
 
-      <form action="https://formspree.io/f/mvkpjzbb" method="POST" class="rsvp-form">
+      <form action="https://formspree.io/f/mvkpjzbb" method="POST" class="rsvp-form" data-aos="fade-up" data-aos-delay="300">
         <input type="text" name="guest_names" placeholder="Аты-жөніңіз..." required>
 
         <div class="radio-group">
@@ -174,14 +178,23 @@
     </section>
 
     <!-- 9. Футер -->
-    <footer class="content-card footer-section">
+    <footer class="content-card footer-section" data-aos="zoom-in" data-aos-duration="1000">
       <h2 class="script-footer">Қадірлі қонағымыз болыңыздар!</h2>
     </footer>
 
   </div>
 
+  <!-- Библиотека анимаций AOS (JS) -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    // 1. Плеер и проигрывание
+    // Инициализация анимаций при скролле
+    AOS.init({
+      once: true, // Анимация срабатывает красиво 1 раз при прокрутке
+      duration: 800, // Длительность 0.8 секунд
+      easing: 'ease-out-cubic'
+    });
+
+    // Плеер
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicToggle');
     let isPlaying = false;
@@ -193,7 +206,7 @@
       } else {
         music.play().then(() => {
           musicBtn.classList.add('spinning');
-        }).catch(err => console.log("Автоплей бұғатталды:", err));
+        }).catch(err => console.log("Автоплей:", err));
       }
       isPlaying = !isPlaying;
     }
@@ -203,20 +216,26 @@
       toggleMusic();
     });
 
-    // Первый клик по экрану запускает музыку
     document.body.addEventListener('click', () => {
       if (!isPlaying) {
         toggleMusic();
       }
     }, { once: true });
 
-    // 2. Таймер
-    const targetDate = new Date("October 3, 2026 19:00:00").getTime();
+    // Скролл по кнопке "бастау"
+    const scrollBtn = document.getElementById('scrollBtn');
+    const invSection = document.getElementById('invitationSection');
+    if (scrollBtn && invSection) {
+      scrollBtn.addEventListener('click', () => {
+        invSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
 
+    // Таймер
+    const targetDate = new Date("October 3, 2026 19:00:00").getTime();
     setInterval(() => {
       const now = new Date().getTime();
       const diff = targetDate - now;
-
       if (diff < 0) return;
 
       document.getElementById("days").innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
