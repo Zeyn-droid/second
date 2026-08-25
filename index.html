@@ -8,6 +8,14 @@
 </head>
 <body>
 
+  <!-- Фондық музыка (Audio tag) -->
+  <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
+
+  <!-- Айналмалы музыка батырмасы -->
+  <button id="musicToggle" class="music-disc-btn" title="Музыканы қосу/өшіру">
+    🎵
+  </button>
+
   <div class="container">
     
     <!-- Шақыру мәтіні -->
@@ -33,6 +41,12 @@
         <p class="event-time">Уақыты: 19:00</p>
       </div>
 
+      <!-- Мекенжайы -->
+      <section class="info-card" style="box-shadow: none; padding: 15px 0 0 0; background: transparent;">
+        <h3>Мекенжайы:</h3>
+        <p>«Алтын Сарай» мейрамханасы</p>
+      </section>
+
       <p class="share-text">Бізбен бірге қуанышымызды бөлісіңіз!</p>
 
       <!-- Той Иелері -->
@@ -41,12 +55,6 @@
         <p class="host-name">Әжесі Мерузия</p>
         <p class="host-parents">Біржан & Әлия</p>
       </div>
-    </section>
-
-    <!-- Мекенжайы -->
-    <section class="info-card">
-      <h3>Мекенжайы:</h3>
-      <p>«Алтын Сарай» мейрамханасы</p>
     </section>
 
     <!-- Таймер -->
@@ -84,6 +92,43 @@
   </div>
 
   <script>
+    // Музыканы басқару скрипті
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicToggle');
+    let isPlaying = false;
+
+    function playMusic() {
+      music.play().then(() => {
+        isPlaying = true;
+        musicBtn.classList.add('spinning');
+        musicBtn.innerHTML = '🎶';
+      }).catch(e => {
+        console.log("Автоплей бұғатталды");
+      });
+    }
+
+    function stopMusic() {
+      music.pause();
+      isPlaying = false;
+      musicBtn.classList.remove('spinning');
+      musicBtn.innerHTML = '🎵';
+    }
+
+    musicBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isPlaying) {
+        stopMusic();
+      } else {
+        playMusic();
+      }
+    });
+
+    document.addEventListener('click', () => {
+      if (!isPlaying) {
+        playMusic();
+      }
+    }, { once: true });
+
     // Таймер
     const targetDate = new Date("October 3, 2026 19:00:00").getTime();
 
