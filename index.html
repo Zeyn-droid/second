@@ -19,7 +19,7 @@
   <!-- Аудио плеер -->
   <audio id="bgMusic" src="miras-zhugunusov-feat.-kazybek-kuraiysh-ashypyn.mp3" loop></audio>
 
-  <!-- Главный контейнер (Отцентрирован для ПК и смартфонов) -->
+  <!-- Главный контейнер -->
   <div class="main-wrapper">
 
     <!-- 1. Басты экран (Hero) -->
@@ -41,7 +41,7 @@
           </button>
         </div>
         
-        <!-- Кнопка медленного скролла "бастау" -->
+        <!-- Кнопка скролла "бастау" -->
         <div id="scrollBtn" class="scroll-down-hint" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600">
           <span>бастау</span>
           <div class="arrow-down">∨</div>
@@ -96,7 +96,7 @@
       </div>
     </section>
 
-    <!-- 4. КҮННӘМА (СПЕЦЭФФЕКТИВТІ КАЛЕНДАРЬ) -->
+    <!-- 4. КҮННӘМА (КАЛЕНДАРЬ) -->
     <section class="content-card calendar-section" data-aos="fade-up" data-aos-duration="1200">
       <div class="calendar-header">
         <span class="sparkle-icon">✨</span>
@@ -117,7 +117,6 @@
           <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div>
           <div class="day">1</div><div class="day">2</div>
           
-          <!-- Главный день с супер-эффектом -->
           <div class="day wedding-day" id="weddingDay">
             <span class="day-num">3</span>
             <span class="wedding-ring">💍</span>
@@ -138,7 +137,50 @@
       </div>
     </section>
 
-    <!-- 5. ТАЙМЕР -->
+    <!-- 5. ТОЙ БАҒДАРЛАМАСЫ (ВОЗВРАЩЕН И УЛУЧШЕН) -->
+    <section class="content-card program-section" data-aos="fade-up" data-aos-duration="1200">
+      <h2 class="script-heading glow-text">Той бағдарламасы</h2>
+      
+      <div class="timeline">
+        <div class="timeline-item hover-lift" data-aos="fade-up" data-aos-delay="100">
+          <div class="timeline-icon">🍸</div>
+          <div class="timeline-content">
+            <span class="time">19:00</span>
+            <h3>Қонақтардың жиналуы</h3>
+            <p>Қарсы алу, фуршет және естелік суретке түсу</p>
+          </div>
+        </div>
+
+        <div class="timeline-item hover-lift" data-aos="fade-up" data-aos-delay="200">
+          <div class="timeline-icon">👰</div>
+          <div class="timeline-content">
+            <span class="time">19:30</span>
+            <h3>Беташар & Келін түсіру</h3>
+            <p>Жас жубайларды қарсы алу салтанаты</p>
+          </div>
+        </div>
+
+        <div class="timeline-item hover-lift" data-aos="fade-up" data-aos-delay="300">
+          <div class="timeline-icon">🍽️</div>
+          <div class="timeline-content">
+            <span class="time">20:00</span>
+            <h3>Тойдың басталуы</h3>
+            <p>Ақ дастархан, тосттар мен құттықтаулар</p>
+          </div>
+        </div>
+
+        <div class="timeline-item hover-lift" data-aos="fade-up" data-aos-delay="400">
+          <div class="timeline-icon">🎉</div>
+          <div class="timeline-content">
+            <span class="time">21:00</span>
+            <h3>Шоу бағдарлама</h3>
+            <p>Ән-би, ойындар және тосын сыйлар</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ТАЙМЕР -->
     <section class="content-card timer-card" data-aos="fade-up" data-aos-duration="1200">
       <div class="timer-bg-overlay"></div>
       <div class="timer-content">
@@ -152,7 +194,7 @@
       </div>
     </section>
 
-    <!-- 6. МЕКЕН-ЖАЙЫ -->
+    <!-- 7. МЕКЕН-ЖАЙЫ -->
     <section class="content-card location-section" data-aos="fade-up" data-aos-duration="1200">
       <h2 class="script-heading glow-text">Мекен-жайымыз:</h2>
       <p class="city-name">ҚҰЛСАРЫ ҚАЛАСЫ</p>
@@ -165,13 +207,13 @@
       <a href="https://2gis.kz/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button hover-lift">2GIS КАРТАНЫ АШУ</a>
     </section>
 
-    <!-- 7. ТОЙ ИЕЛЕРІ -->
+    <!-- 8. ТОЙ ИЕЛЕРІ -->
     <section class="content-card hosts-card" data-aos="fade-up" data-aos-duration="1200">
       <h2 class="script-heading glow-text">Той иелері:</h2>
       <p class="host-names">Әжесі Мерузия<br>Біржан & Әлия</p>
     </section>
 
-    <!-- 8. ФОРМА -->
+    <!-- 9. ФОРМА -->
     <section class="content-card rsvp-section" data-aos="fade-up" data-aos-duration="1200">
       <h2 class="script-heading glow-text">Сауалнама:</h2>
       <p class="rsvp-title">ТОЙҒА КЕЛУІҢІЗДІ РАСТАУЫҢЫЗДЫ СҰРАЙМЫЗ</p>
@@ -199,7 +241,7 @@
       </form>
     </section>
 
-    <!-- 9. ФУТЕР -->
+    <!-- 10. ФУТЕР -->
     <footer class="content-card footer-section">
       <h2 class="script-footer glow-gold-text">Қадірлі қонағымыз болыңыздар!</h2>
     </footer>
@@ -211,39 +253,19 @@
   <script>
     AOS.init({ once: true, duration: 1000, easing: 'ease-out' });
 
-    // 1. Медленный плавающий скролл (Кастомная функция плавной анимации)
-    function smoothScrollTo(targetPosition, duration) {
-      const startPosition = window.pageYOffset || document.documentElement.scrollTop;
-      const distance = targetPosition - startPosition;
-      let startTime = null;
-
-      function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-      }
-
-      // Функция замедления в начале и конце
-      function easeInOutCubic(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t * t + b;
-        t -= 2;
-        return c / 2 * (t * t * t + 2) + b;
-      }
-
-      requestAnimationFrame(animation);
-    }
-
+    // 1. НАДЕЖНЫЙ ПЛАВНЫЙ СКРОЛЛ НА "БАСТАУ"
     const scrollBtn = document.getElementById('scrollBtn');
     const invitationSection = document.getElementById('invitationSection');
 
     if (scrollBtn && invitationSection) {
       scrollBtn.addEventListener('click', () => {
-        const targetOffset = invitationSection.offsetTop;
-        // 2200 миллисекунд (2.2 секунды) = ОЧЕНЬ медленный и красивый скролл
-        smoothScrollTo(targetOffset, 2200);
+        const yOffset = -20; // Небольшой отступ сверху
+        const y = invitationSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        
+        window.scrollTo({
+          top: y,
+          behavior: 'smooth'
+        });
       });
     }
 
@@ -330,9 +352,6 @@
       document.getElementById("minutes").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
       document.getElementById("seconds").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
     }, 1000);
-  </script>
-</body>
-</html>
   </script>
 </body>
 </html>
