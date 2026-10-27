@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlizzardSMP — Ванильный Minecraft Сервер</title>
-    <!-- Подключаем внешние стили Liquid Glass -->
+    <!-- Подключаем стили Liquid Glass -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Жидкие капли на заднем фоне -->
+    <!-- Жидкие анимированные капли на белом фоне -->
     <div class="blob-container">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
     </div>
 
-    <!-- Главная полупрозрачная стеклянная карточка -->
+    <!-- Главная полупрозрачная карточка (Liquid Glass) -->
     <div class="glass-card" id="mainCard">
         <h1>BlizzardSMP</h1>
         <div class="subtitle">Чистый Vanilla SMP сервер</div>
 
-        <!-- Статус онлайн/офлайн -->
+        <!-- Статус сервера -->
         <div id="statusBadge" class="status-badge offline">
             <span class="status-dot"></span>
-            <span id="statusText">Загрузка...</span>
+            <span id="statusText">Проверка сервера...</span>
         </div>
 
-        <!-- Информация о сервере -->
+        <!-- Данные об онлайне -->
         <div class="info-grid">
             <div class="info-box">
                 <div class="info-title">Игроков онлайн</div>
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <!-- Поле с IP и кнопкой копирования -->
+        <!-- Поле с IP-адресом и кнопкой -->
         <div class="ip-box">
             <span class="ip-text" id="serverIp">blizzard.mcsh.gg</span>
             <button class="copy-btn" onclick="copyIp(event)">Скопировать</button>
@@ -49,42 +49,68 @@
         // IP-адрес твоего сервера
         const SERVER_IP = 'blizzard.mcsh.gg';
 
-        // Функция получения данных о сервере с публичного API
+        // Улучшенная функция проверки статуса сервера (с fallback-запросом)
         async function fetchServerStatus() {
             const statusBadge = document.getElementById('statusBadge');
             const statusText = document.getElementById('statusText');
             const playerCount = document.getElementById('playerCount');
 
             try {
-                const response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
-                const data = await response.json();
+                // Попытка 1: Запрос к mcsrvstat.us
+                let response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
+                let data = await response.json();
 
-                if (data.online) {
+                let isOnline = false;
+                let currentPlayers = 0;
+                let maxPlayers = 0;
+
+                if (data && data.online === true) {
+                    isOnline = true;
+                    currentPlayers = data.players ? data.players.online : 0;
+                    maxPlayers = data.players ? data.players.max : 0;
+                } else {
+                    // Попытка 2 (Резервная): Запрос к mcapi.us, если первый API вернул offline
+                    const fallbackResp = await fetch(`https://mcapi.us/server/status?ip=${SERVER_IP}`);
+                    const fallbackData = await fallbackResp.json();
+
+                    if (fallbackData && fallbackData.online === true) {
+                        isOnline = true;
+                        currentPlayers = fallbackData.players ? fallbackData.players.now : 0;
+                        maxPlayers = fallbackData.players ? fallbackData.players.max : 0;
+                    }
+                }
+
+                // Обновляем интерфейс в зависимости от реального статуса
+                if (isOnline) {
                     statusBadge.className = 'status-badge online';
                     statusText.textContent = 'Сервер онлайн';
-                    playerCount.textContent = `${data.players.online} / ${data.players.max}`;
+                    playerCount.textContent = `${currentPlayers} / ${maxPlayers}`;
                 } else {
                     statusBadge.className = 'status-badge offline';
                     statusText.textContent = 'Сервер офлайн';
                     playerCount.textContent = '0 / 0';
                 }
+
             } catch (error) {
-                console.error('Ошибка получения данных:', error);
+                console.error('Ошибка при получении статуса сервера:', error);
                 statusBadge.className = 'status-badge offline';
-                statusText.textContent = 'Ошибка подключения';
+                statusText.textContent = 'Сервер офлайн';
+                playerCount.textContent = '0 / 0';
             }
         }
 
-        // Функция копирования IP
+        // Функция копирования IP в буфер обмена
         function copyIp(event) {
-            event.stopPropagation(); // Чтобы не срабатывал волновой эффект самой карточки
+            event.stopPropagation(); // Отменяем всплытие события, чтобы не срабатывал ripple-эффект карточки
             const ipText = document.getElementById('serverIp').innerText;
             navigator.clipboard.writeText(ipText).then(() => {
                 alert('IP-адрес скопирован: ' + ipText);
+            }).catch(err => {
+                console.error('Не удалось скопировать IP:', err);
             });
         }
 
-        // Эффект жидкой волны при нажатии (Liquid Ripple)
+        // Эффект жидкой волны при нажатии/клике (Liquid Ripple)
         document.getElementById('mainCard').addEventListener('click', function (e) {
             const card = e.currentTarget;
             const circle = document.createElement('span');
@@ -105,9 +131,9 @@
             card.appendChild(circle);
         });
 
-        // Запуск при открытии страницы и обновление каждые 30 сек
+        // Запуск проверки при загрузке и авто-обновление каждые 15 секунд
         fetchServerStatus();
-        setInterval(fetchServerStatus, 30000);
+        setInterval(fetchServerStatus, 15000);
     </script>
 </body>
 </html>
