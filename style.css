@@ -1,5 +1,5 @@
 /* ==========================================
-   1. СБРОС СТИЛЕЙ И ЧИСТЫЙ БЕЛЫЙ ФОН
+   1. ОСНОВНЫЕ СТИЛИ И БЕЛЫЙ ФОН
    ========================================== */
 * {
     box-sizing: border-box;
@@ -9,7 +9,6 @@
 }
 
 body {
-    /* Чистый белый фон */
     background-color: #ffffff;
     color: #0f172a;
     min-height: 100vh;
@@ -22,7 +21,7 @@ body {
 }
 
 /* ==========================================
-   2. АНИМИРОВАННЫЕ "ЖИДКИЕ" ФОНОВЫЕ КАПЛИ (LIQUID BLOBS)
+   2. АНИМИРОВАННЫЕ LIQUID BLOBS
    ========================================== */
 .blob-container {
     position: fixed;
@@ -45,7 +44,7 @@ body {
 .blob-1 {
     width: 380px;
     height: 380px;
-    background: rgba(56, 189, 248, 0.4); /* Нежно-голубой */
+    background: rgba(56, 189, 248, 0.4);
     top: 10%;
     left: 15%;
 }
@@ -53,7 +52,7 @@ body {
 .blob-2 {
     width: 420px;
     height: 420px;
-    background: rgba(147, 197, 253, 0.45); /* Лазурный */
+    background: rgba(147, 197, 253, 0.45);
     bottom: 10%;
     right: 15%;
     animation-delay: -5s;
@@ -65,12 +64,11 @@ body {
 }
 
 /* ==========================================
-   3. КАРТОЧКА LIQUID GLASS (ЖИДКОЕ СТЕКЛО)
+   3. КАРТОЧКА LIQUID GLASS
    ========================================== */
 .glass-card {
     position: relative;
     z-index: 1;
-    /* Полупрозрачное белое стекло */
     background: rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
@@ -93,7 +91,7 @@ body {
 }
 
 /* ==========================================
-   4. ТЕКСТЫ И ПОЛУПРОЗРАЧНЫЕ БЛОКИ
+   4. ТЕКСТЫ И ИНТЕРФЕЙС
    ========================================== */
 h1 {
     font-size: 34px;
@@ -111,7 +109,6 @@ h1 {
     margin-bottom: 24px;
 }
 
-/* Значок статуса */
 .status-badge {
     display: inline-flex;
     align-items: center;
@@ -147,7 +144,6 @@ h1 {
     box-shadow: 0 0 10px #22c55e;
 }
 
-/* Информационные плашки */
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -179,7 +175,6 @@ h1 {
     margin-top: 4px;
 }
 
-/* Поле скопировать IP */
 .ip-box {
     display: flex;
     align-items: center;
@@ -216,7 +211,6 @@ h1 {
     box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
 }
 
-/* Жидкая волна при клике / касании (Liquid Ripple) */
 .ripple {
     position: absolute;
     border-radius: 50%;
