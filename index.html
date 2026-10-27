@@ -4,44 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlizzardSMP — Ванильный Minecraft Сервер</title>
-    <!-- Подключаем стили Liquid Glass -->
+    <!-- Подключаем внешний файл стилей Liquid Glass -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Жидкие анимированные капли на белом фоне -->
+    <!-- Анимированный задний жидкий фон -->
     <div class="blob-container">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
     </div>
 
-    <!-- Главная полупрозрачная карточка (Liquid Glass) -->
-    <div class="glass-card" id="mainCard">
-        <h1>BlizzardSMP</h1>
-        <div class="subtitle">Чистый Vanilla SMP сервер</div>
+    <!-- 1. ГЛАВНОЕ МЕНЮ (НАВИГАЦИЯ) -->
+    <header class="glass-nav">
+        <div class="logo">Blizzard<span>SMP</span></div>
+        <nav class="nav-links">
+            <button class="nav-btn active" onclick="showSection('home')">Главная</button>
+            <button class="nav-btn" onclick="openModal('rulesModal')">Правила</button>
+            <button class="nav-btn" onclick="openModal('connectModal')">Как начать</button>
+        </nav>
+    </header>
 
-        <!-- Статус сервера -->
+    <!-- 2. ОСНОВНАЯ КАРТОЧКА СЕРВЕРА (LIQUID GLASS) -->
+    <main class="glass-card" id="mainCard">
+        <h1>BlizzardSMP</h1>
+        <div class="subtitle">Чистый Vanilla SMP без кастомной экономики</div>
+
+        <!-- Статус сервера (Светящаяся метка) -->
         <div id="statusBadge" class="status-badge offline">
             <span class="status-dot"></span>
             <span id="statusText">Проверка сервера...</span>
         </div>
 
-        <!-- Данные об онлайне -->
+        <!-- Информационная сетка -->
         <div class="info-grid">
             <div class="info-box">
                 <div class="info-title">Игроков онлайн</div>
-                <div id="playerCount" class="info-value">-- / --</div>
+                <div id="playerCount" class="info-value">0 / 0</div>
             </div>
             <div class="info-box">
-                <div class="info-title">Режим</div>
+                <div class="info-title">Режим игры</div>
                 <div class="info-value">Vanilla</div>
             </div>
         </div>
 
-        <!-- Поле с IP-адресом и кнопкой -->
+        <!-- Поле с IP и кнопками управления -->
         <div class="ip-box">
             <span class="ip-text" id="serverIp">blizzard.mcsh.gg</span>
             <button class="copy-btn" onclick="copyIp(event)">Скопировать</button>
+        </div>
+
+        <!-- Кнопка принудительного обновления статуса -->
+        <button class="refresh-btn" onclick="fetchServerStatus(event)">
+            🔄 Обновить статус
+        </button>
+    </main>
+
+    <!-- 3. МОДАЛЬНОЕ ОКНО: ПРАВИЛА СЕРВЕРА -->
+    <div id="rulesModal" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'rulesModal')">
+        <div class="glass-modal">
+            <h2>📜 Правила BlizzardSMP</h2>
+            <ul class="rules-list">
+                <li><strong>1. Уважение:</strong> Запрещены оскорбления, токсичность и гриферство.</li>
+                <li><strong>2. Честная игра:</strong> Использование читов, X-Ray и модов на взлом запрещено.</li>
+                <li><strong>3. Чистый Vanilla:</strong> Строим и развиваемся без кастомной экономики и приватов.</li>
+            </ul>
+            <button class="close-btn" onclick="closeModal('rulesModal')">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- 4. МОДАЛЬНОЕ ОКНО: КАК НАЧАТЬ ИГРАТЬ -->
+    <div id="connectModal" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'connectModal')">
+        <div class="glass-modal">
+            <h2>🎮 Как подключиться?</h2>
+            <ol class="steps-list">
+                <li>Запустите Minecraft Java Edition.</li>
+                <li>Перейдите в раздел <strong>«Сетевая игра»</strong>.</li>
+                <li>Нажмите <strong>«По адресу»</strong> или <strong>«Добавить»</strong>.</li>
+                <li>Введите IP: <code>blizzard.mcsh.gg</code></li>
+            </ol>
+            <button class="close-btn" onclick="closeModal('connectModal')">Понятно</button>
         </div>
     </div>
 
@@ -49,68 +91,79 @@
         // IP-адрес твоего сервера
         const SERVER_IP = 'blizzard.mcsh.gg';
 
-        // Улучшенная функция проверки статуса сервера (с fallback-запросом)
-        async function fetchServerStatus() {
+        // Улучшенная логика проверки статуса
+        async function fetchServerStatus(e) {
+            if (e) e.stopPropagation();
+
             const statusBadge = document.getElementById('statusBadge');
             const statusText = document.getElementById('statusText');
             const playerCount = document.getElementById('playerCount');
 
-            try {
-                // Попытка 1: Запрос к mcsrvstat.us
-                let response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
-                let data = await response.json();
+            statusText.textContent = 'Обновление...';
 
-                let isOnline = false;
-                let currentPlayers = 0;
-                let maxPlayers = 0;
+            try {
+                // Делаем запрос к API mcsrvstat.us
+                const response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
+                const data = await response.json();
+
+                // Проверяем, не является ли ответ фейковым онлайном хостинга MCServerHost
+                let isRealOnline = false;
 
                 if (data && data.online === true) {
-                    isOnline = true;
-                    currentPlayers = data.players ? data.players.online : 0;
-                    maxPlayers = data.players ? data.players.max : 0;
-                } else {
-                    // Попытка 2 (Резервная): Запрос к mcapi.us, если первый API вернул offline
-                    const fallbackResp = await fetch(`https://mcapi.us/server/status?ip=${SERVER_IP}`);
-                    const fallbackData = await fallbackResp.json();
+                    // Если игроковая статистика отсутствует или motd указывает на то, что сервер спит/выключен
+                    const motdClean = data.motd ? data.motd.clean.join(' ').toLowerCase() : '';
+                    const isSleeping = motdClean.includes('offline') || motdClean.includes('sleeping') || motdClean.includes('starting');
 
-                    if (fallbackData && fallbackData.online === true) {
-                        isOnline = true;
-                        currentPlayers = fallbackData.players ? fallbackData.players.now : 0;
-                        maxPlayers = fallbackData.players ? fallbackData.players.max : 0;
+                    // Если игроков 0 и motd подозрительный — считаем офлайном
+                    if (!isSleeping && (data.players.online > 0 || (data.debug && data.debug.ping === true))) {
+                        isRealOnline = true;
                     }
                 }
 
-                // Обновляем интерфейс в зависимости от реального статуса
-                if (isOnline) {
+                if (isRealOnline) {
                     statusBadge.className = 'status-badge online';
                     statusText.textContent = 'Сервер онлайн';
-                    playerCount.textContent = `${currentPlayers} / ${maxPlayers}`;
+                    playerCount.textContent = `${data.players.online} / ${data.players.max}`;
                 } else {
+                    // Точный вывод статуса "Офлайн" при выключенном сервере
                     statusBadge.className = 'status-badge offline';
                     statusText.textContent = 'Сервер офлайн';
                     playerCount.textContent = '0 / 0';
                 }
 
             } catch (error) {
-                console.error('Ошибка при получении статуса сервера:', error);
+                console.error('Ошибка запроса:', error);
                 statusBadge.className = 'status-badge offline';
                 statusText.textContent = 'Сервер офлайн';
                 playerCount.textContent = '0 / 0';
             }
         }
 
-        // Функция копирования IP в буфер обмена
+        // Копирование IP
         function copyIp(event) {
-            event.stopPropagation(); // Отменяем всплытие события, чтобы не срабатывал ripple-эффект карточки
+            event.stopPropagation();
             const ipText = document.getElementById('serverIp').innerText;
             navigator.clipboard.writeText(ipText).then(() => {
                 alert('IP-адрес скопирован: ' + ipText);
-            }).catch(err => {
-                console.error('Не удалось скопировать IP:', err);
             });
         }
 
-        // Эффект жидкой волны при нажатии/клике (Liquid Ripple)
+        // Управление модальными окнами (Главное меню)
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function closeModalOnOuterClick(event, id) {
+            if (event.target.id === id) {
+                closeModal(id);
+            }
+        }
+
+        // Эффект жидкой волны Liquid Ripple
         document.getElementById('mainCard').addEventListener('click', function (e) {
             const card = e.currentTarget;
             const circle = document.createElement('span');
@@ -131,7 +184,7 @@
             card.appendChild(circle);
         });
 
-        // Запуск проверки при загрузке и авто-обновление каждые 15 секунд
+        // Первый запуск и автоматический повтор каждые 15 сек
         fetchServerStatus();
         setInterval(fetchServerStatus, 15000);
     </script>
