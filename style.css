@@ -1,0 +1,234 @@
+/* ==========================================
+   1. СБРОС СТИЛЕЙ И ЧИСТЫЙ БЕЛЫЙ ФОН
+   ========================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    /* Чистый белый фон */
+    background-color: #ffffff;
+    color: #0f172a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+/* ==========================================
+   2. АНИМИРОВАННЫЕ "ЖИДКИЕ" ФОНОВЫЕ КАПЛИ (LIQUID BLOBS)
+   ========================================== */
+.blob-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.5;
+    animation: float 10s infinite ease-in-out alternate;
+}
+
+.blob-1 {
+    width: 380px;
+    height: 380px;
+    background: rgba(56, 189, 248, 0.4); /* Нежно-голубой */
+    top: 10%;
+    left: 15%;
+}
+
+.blob-2 {
+    width: 420px;
+    height: 420px;
+    background: rgba(147, 197, 253, 0.45); /* Лазурный */
+    bottom: 10%;
+    right: 15%;
+    animation-delay: -5s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 40px) scale(1.15); }
+}
+
+/* ==========================================
+   3. КАРТОЧКА LIQUID GLASS (ЖИДКОЕ СТЕКЛО)
+   ========================================== */
+.glass-card {
+    position: relative;
+    z-index: 1;
+    /* Полупрозрачное белое стекло */
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 28px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06),
+                inset 0 1px 2px rgba(255, 255, 255, 1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.09),
+                inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+
+/* ==========================================
+   4. ТЕКСТЫ И ПОЛУПРОЗРАЧНЫЕ БЛОКИ
+   ========================================== */
+h1 {
+    font-size: 34px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0284c7, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+/* Значок статуса */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+}
+
+.status-badge.online {
+    background: rgba(34, 197, 94, 0.15);
+    color: #15803d;
+    border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+.status-badge.offline {
+    background: rgba(239, 68, 68, 0.15);
+    color: #b91c1c;
+    border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.status-badge.online .status-dot {
+    box-shadow: 0 0 10px #22c55e;
+}
+
+/* Информационные плашки */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.info-box {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 18px;
+    padding: 16px;
+    text-align: center;
+}
+
+.info-title {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+}
+
+.info-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-top: 4px;
+}
+
+/* Поле скопировать IP */
+.ip-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 18px;
+    padding: 8px 8px 8px 18px;
+}
+
+.ip-text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0369a1;
+}
+
+.copy-btn {
+    background: linear-gradient(135deg, #0284c7, #0369a1);
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+}
+
+.copy-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+}
+
+/* Жидкая волна при клике / касании (Liquid Ripple) */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(56, 189, 248, 0.4);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
