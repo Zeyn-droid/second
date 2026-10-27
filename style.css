@@ -1,5 +1,5 @@
 /* ==========================================
-   1. ОСНОВНЫЕ СТИЛИ И БЕЛЫЙ ФОН
+   1. СБРОС СТИЛЕЙ И ЧИСТЫЙ БЕЛЫЙ ФОН
    ========================================== */
 * {
     box-sizing: border-box;
@@ -13,15 +13,16 @@ body {
     color: #0f172a;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
     position: relative;
-    padding: 20px;
+    padding: 80px 20px 20px 20px;
 }
 
 /* ==========================================
-   2. АНИМИРОВАННЫЕ LIQUID BLOBS
+   2. ФОНОВЫЕ "ЖИДКИЕ" КАПЛИ (LIQUID BLOBS)
    ========================================== */
 .blob-container {
     position: fixed;
@@ -37,7 +38,7 @@ body {
     position: absolute;
     border-radius: 50%;
     filter: blur(90px);
-    opacity: 0.5;
+    opacity: 0.45;
     animation: float 10s infinite ease-in-out alternate;
 }
 
@@ -64,12 +65,65 @@ body {
 }
 
 /* ==========================================
-   3. КАРТОЧКА LIQUID GLASS
+   3. ГЛАВНОЕ МЕНЮ (LIQUID GLASS NAV)
+   ========================================== */
+.glass-nav {
+    position: fixed;
+    top: 15px;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 600px;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.logo span {
+    color: #0284c7;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-btn.active, .nav-btn:hover {
+    background: rgba(2, 132, 199, 0.1);
+    color: #0284c7;
+}
+
+/* ==========================================
+   4. ОСНОВНАЯ КАРТОЧКА LIQUID GLASS
    ========================================== */
 .glass-card {
     position: relative;
     z-index: 1;
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.9);
@@ -81,18 +135,8 @@ body {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06),
                 inset 0 1px 2px rgba(255, 255, 255, 1);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.glass-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.09),
-                inset 0 1px 2px rgba(255, 255, 255, 1);
-}
-
-/* ==========================================
-   4. ТЕКСТЫ И ИНТЕРФЕЙС
-   ========================================== */
 h1 {
     font-size: 34px;
     font-weight: 800;
@@ -109,6 +153,7 @@ h1 {
     margin-bottom: 24px;
 }
 
+/* Метка статуса */
 .status-badge {
     display: inline-flex;
     align-items: center;
@@ -118,7 +163,6 @@ h1 {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 24px;
-    backdrop-filter: blur(10px);
 }
 
 .status-badge.online {
@@ -144,6 +188,7 @@ h1 {
     box-shadow: 0 0 10px #22c55e;
 }
 
+/* Блоки с информацией */
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -152,19 +197,17 @@ h1 {
 }
 
 .info-box {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 18px;
     padding: 16px;
-    text-align: center;
 }
 
 .info-title {
     font-size: 11px;
     color: #64748b;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
     font-weight: 700;
 }
 
@@ -175,19 +218,21 @@ h1 {
     margin-top: 4px;
 }
 
+/* Поле IP и копирование */
 .ip-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.9);
     border-radius: 18px;
     padding: 8px 8px 8px 18px;
+    margin-bottom: 15px;
 }
 
 .ip-text {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: monospace;
     font-size: 15px;
     font-weight: 700;
     color: #0369a1;
@@ -198,23 +243,96 @@ h1 {
     color: #ffffff;
     border: none;
     border-radius: 14px;
-    padding: 12px 20px;
-    font-size: 14px;
+    padding: 10px 18px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
+}
+
+.refresh-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    padding: 12px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
 }
 
-.copy-btn:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+.refresh-btn:hover {
+    background: rgba(255, 255, 255, 0.85);
 }
 
+/* ==========================================
+   5. МОДАЛЬНЫЕ ОКНА (ОКОШКИ МЕНЮ)
+   ========================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.glass-modal {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-radius: 24px;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.glass-modal h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #0f172a;
+}
+
+.rules-list, .steps-list {
+    margin-left: 20px;
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    width: 100%;
+    background: #0284c7;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Эффект Liquid Ripple при касании */
 .ripple {
     position: absolute;
     border-radius: 50%;
-    background: rgba(56, 189, 248, 0.4);
+    background: rgba(56, 189, 248, 0.35);
     transform: scale(0);
     animation: ripple-animation 0.6s linear;
     pointer-events: none;
