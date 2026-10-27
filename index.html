@@ -1,357 +1,195 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Салауат & Аида — Тойға шақыру</title>
-  
-  <!-- Шрифттер -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- AOS Библиотекасы -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlizzardSMP — Мониторинг сервера</title>
+    <style>
+        /* Основные стили страницы */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0b1d3a, #020b18);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Контейнер карточки сервера */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Заголовок */
+        h1 {
+            margin-top: 0;
+            font-size: 28px;
+            color: #00d2ff;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+        }
+
+        /* Индикатор статуса */
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .online {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 1px solid #2ecc71;
+        }
+
+        .offline {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+
+        /* Информация об игроках */
+        .info-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-title {
+            font-size: 14px;
+            color: #a0a0a0;
+        }
+
+        .info-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* Поле с IP адресом и кнопкой */
+        .ip-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .ip-text {
+            flex-grow: 1;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 16px;
+            color: #00d2ff;
+        }
+
+        .copy-btn {
+            background: #00d2ff;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #80e5ff;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Аудио плеер -->
-  <audio id="bgMusic" src="miras-zhugunusov-feat.-kazybek-kuraiysh-ashypyn.mp3" loop></audio>
-
-  <!-- Главный контейнер -->
-  <div class="main-wrapper">
-
-    <!-- 1. Басты экран (Hero) -->
-    <header class="hero-card">
-      <canvas id="sparklesCanvas"></canvas>
-      <div class="hero-overlay"></div>
-      
-      <div class="hero-content">
-        <p class="top-date" data-aos="fade-down" data-aos-duration="1200">03.10.2026</p>
+    <div class="card">
+        <h1>BlizzardSMP</h1>
         
-        <h1 class="couple-names" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200">
-          САЛАУАТ<br><span class="and-symbol">&</span><br>АИДА
-        </h1>
-        
-        <!-- Виниловый плеер -->
-        <div class="player-container" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
-          <button id="musicToggle" class="vinyl-disc" title="Музыканы қосу/өшіру">
-            <span class="disc-center"></span>
-          </button>
-        </div>
-        
-        <!-- Кнопка скролла "бастау" -->
-        <div id="scrollBtn" class="scroll-down-hint" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600">
-          <span>бастау</span>
-          <div class="arrow-down">∨</div>
-        </div>
-      </div>
-    </header>
+        <!-- Значок статуса (изменяется через JS) -->
+        <div id="statusBadge" class="status-badge offline">Загрузка...</div>
 
-    <!-- 2. Шақыру мәтіні -->
-    <section id="invitationSection" class="content-card invitation-section" data-aos="fade-up" data-aos-duration="1200">
-      <h2 class="script-heading glow-text">Құрметті</h2>
-      <p class="guest-categories">
-        АҒАЙЫН-ТУЫС, БАУЫРЛАР,<br>
-        ҚҰДА-ЖЕКЖАТ,<br>
-        НАҒАШЫ-ЖИЕН, БӨЛЕЛЕР,<br>
-        ДОС-ЖАРАН, КӨРШІЛЕР<br>
-        МЕН ӘРІПТЕСТЕР!
-      </p>
-      
-      <p class="invite-label">СІЗДЕРДІ</p>
-      
-      <p class="hosts-detail">
-        баламыз <span class="highlight-script">Салауат</span> пен<br>
-        келініміз <span class="highlight-script">Аиданың</span>
-      </p>
-
-      <p class="event-desc">
-        ҮЙЛЕНУ ТОЙЫНА АРНАЛҒАН<br>
-        АҚ ДАСТАРХАНЫМЫЗДЫҢ<br>
-        ҚАДІРЛІ ҚОНАҒЫ БОЛУҒА<br>
-        ШАҚЫРАМЫЗ!
-      </p>
-    </section>
-
-    <!-- 3. Блок «ҚАШАН БОЛАДЫ?» -->
-    <section class="content-card event-date-card" data-aos="fade-up" data-aos-duration="1200">
-      <h2 class="script-heading glow-text">Той қашан өтеді?</h2>
-      <div class="date-badge-wrapper">
-        <div class="date-badge hover-lift">
-          <div class="badge-icon">📅</div>
-          <div class="badge-text">
-            <span class="badge-day">3 Қазан</span>
-            <span class="badge-year">2026 жыл</span>
-          </div>
-        </div>
-        <div class="date-badge hover-lift">
-          <div class="badge-icon">⏰</div>
-          <div class="badge-text">
-            <span class="badge-day">Басталуы</span>
-            <span class="badge-year">Сағат 19:00</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. КҮННӘМА (КАЛЕНДАРЬ) -->
-    <section class="content-card calendar-section" data-aos="fade-up" data-aos-duration="1200">
-      <div class="calendar-header">
-        <span class="sparkle-icon">✨</span>
-        <h2 class="script-month glow-gold-text">Қазан 2026</h2>
-        <span class="sparkle-icon">✨</span>
-      </div>
-
-      <div class="calendar-container">
-        <div class="calendar-grid">
-          <div class="day-name">ДҮ</div>
-          <div class="day-name">СЕС</div>
-          <div class="day-name">СӘР</div>
-          <div class="day-name">БЕЙ</div>
-          <div class="day-name">ЖҰМ</div>
-          <div class="day-name">СЕН</div>
-          <div class="day-name">ЖЕК</div>
-
-          <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div>
-          <div class="day">1</div><div class="day">2</div>
-          
-          <div class="day wedding-day" id="weddingDay">
-            <span class="day-num">3</span>
-            <span class="wedding-ring">💍</span>
-            <span class="tooltip">Той күні! 🎉</span>
-          </div>
-
-          <div class="day">4</div><div class="day">5</div><div class="day">6</div>
-          <div class="day">7</div><div class="day">8</div><div class="day">9</div>
-          <div class="day">10</div><div class="day">11</div><div class="day">12</div>
-          <div class="day">13</div><div class="day">14</div><div class="day">15</div>
-          <div class="day">16</div><div class="day">17</div><div class="day">18</div>
-          <div class="day">19</div><div class="day">20</div><div class="day">21</div>
-          <div class="day">22</div><div class="day">23</div><div class="day">24</div>
-          <div class="day">25</div><div class="day">26</div><div class="day">27</div>
-          <div class="day">28</div><div class="day">29</div><div class="day">30</div>
-          <div class="day">31</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. ТОЙ БАҒДАРЛАМАСЫ (ВОЗВРАЩЕН И УЛУЧШЕН) -->
-    <section class="content-card program-section" data-aos="fade-up" data-aos-duration="1200">
-      <h2 class="script-heading glow-text">Той бағдарламасы</h2>
-      
-      <div class="timeline">
-        <div class="timeline-item hover-lift" data-aos="fade-up" data-aos-delay="100">
-          <div class="timeline-icon">🍸</div>
-          <div class="timeline-content">
-            <span class="time">19:00</span>
-            <h3>Қонақтардың жиналуы</h3>
-            <p>Қарсы алу, фуршет және естелік суретке түсу</p>
-          </div>
+        <!-- Данные об онлайне -->
+        <div class="info-box">
+            <div class="info-title">Игроков онлайн</div>
+            <div id="playerCount" class="info-value">-- / --</div>
         </div>
 
-        <div class="timeline-item hover-lift" data-aos="fade-up" data-aos-delay="200">
-          <div class="timeline-icon">👰</div>
-          <div class="timeline-content">
-            <span class="time">19:30</span>
-            <h3>Беташар & Келін түсіру</h3>
-            <p>Жас жубайларды қарсы алу салтанаты</p>
-          </div>
+        <div class="info-box">
+            <div class="info-title">Версия сервера</div>
+            <div id="serverVersion" class="info-value">--</div>
         </div>
 
-        <div class="timeline-item hover-lift" data-aos="fade-up" data-aos-delay="300">
-          <div class="timeline-icon">🍽️</div>
-          <div class="timeline-content">
-            <span class="time">20:00</span>
-            <h3>Тойдың басталуы</h3>
-            <p>Ақ дастархан, тосттар мен құттықтаулар</p>
-          </div>
+        <!-- Скопировать IP -->
+        <div class="ip-container">
+            <div class="ip-text" id="serverIp">blizzard.mcsh.gg</div>
+            <button class="copy-btn" onclick="copyIp()">Копировать</button>
         </div>
+    </div>
 
-        <div class="timeline-item hover-lift" data-aos="fade-up" data-aos-delay="400">
-          <div class="timeline-icon">🎉</div>
-          <div class="timeline-content">
-            <span class="time">21:00</span>
-            <h3>Шоу бағдарлама</h3>
-            <p>Ән-би, ойындар және тосын сыйлар</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <script>
+        // Константа с адресом твоего сервера
+        const SERVER_IP = 'blizzard.mcsh.gg';
 
-    <!-- 6. ТАЙМЕР -->
-    <section class="content-card timer-card" data-aos="fade-up" data-aos-duration="1200">
-      <div class="timer-bg-overlay"></div>
-      <div class="timer-content">
-        <h2 class="timer-title">ТОЙ САЛТАНАТЫНА ДЕЙІН:</h2>
-        <div class="timer-grid" id="timer">
-          <div class="time-box hover-lift"><span id="days">00</span><small>КҮН</small></div>
-          <div class="time-box hover-lift"><span id="hours">00</span><small>САҒАТ</small></div>
-          <div class="time-box hover-lift"><span id="minutes">00</span><small>МИНУТ</small></div>
-          <div class="time-box hover-lift"><span id="seconds">00</span><small>СЕКУНД</small></div>
-        </div>
-      </div>
-    </section>
+        // Функция получения статуса сервера через API
+        async function fetchServerStatus() {
+            const statusBadge = document.getElementById('statusBadge');
+            const playerCount = document.getElementById('playerCount');
+            const serverVersion = document.getElementById('serverVersion');
 
-    <!-- 7. МЕКЕН-ЖАЙЫ -->
-    <section class="content-card location-section" data-aos="fade-up" data-aos-duration="1200">
-      <h2 class="script-heading glow-text">Мекен-жайымыз:</h2>
-      <p class="city-name">ҚҰЛСАРЫ ҚАЛАСЫ</p>
-      <p class="venue-name">«АЛТЫН САРАЙ»<br>МЕЙРАМХАНАСЫ</p>
-      
-      <div class="venue-image hover-lift">
-        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Мейрамхана">
-      </div>
+            try {
+                // Используем бесплатный API mcsrvstat.us
+                const response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
+                const data = await response.json();
 
-      <a href="https://2gis.kz/atyrau/geo/70000001076243799" target="_blank" rel="noopener noreferrer" class="map-button hover-lift">2GIS КАРТАНЫ АШУ</a>
-    </section>
-
-    <!-- 8. ТОЙ ИЕЛЕРІ -->
-    <section class="content-card hosts-card" data-aos="fade-up" data-aos-duration="1200">
-      <h2 class="script-heading glow-text">Той иелері:</h2>
-      <p class="host-names">Әжесі Мерузия<br>Біржан & Әлия</p>
-    </section>
-
-    <!-- 9. ФОРМА -->
-    <section class="content-card rsvp-section" data-aos="fade-up" data-aos-duration="1200">
-      <h2 class="script-heading glow-text">Сауалнама:</h2>
-      <p class="rsvp-title">ТОЙҒА КЕЛУІҢІЗДІ РАСТАУЫҢЫЗДЫ СҰРАЙМЫЗ</p>
-      <p class="rsvp-sub">Аты-жөніңіз (жұбыңызбен келетін болсаңыз, екеуіңіздің де атыңызды жазуыңызды өтінеміз)</p>
-
-      <form action="https://formspree.io/f/mvkpjzbb" method="POST" class="rsvp-form">
-        <input type="text" name="guest_names" placeholder="Аты-жөніңіз..." required>
-
-        <div class="radio-group">
-          <label class="radio-label">
-            <input type="radio" name="attendance" value="Қатысамын" required>
-            <span>Қатысамын</span>
-          </label>
-          <label class="radio-label">
-            <input type="radio" name="attendance" value="Жұбыммен келемін">
-            <span>Жұбыммен келемін</span>
-          </label>
-          <label class="radio-label">
-            <input type="radio" name="attendance" value="Өкінішке орай, келе алмаймын">
-            <span>Өкінішке орай, келе алмаймын</span>
-          </label>
-        </div>
-
-        <button type="submit" class="submit-btn hover-lift">Жіберу</button>
-      </form>
-    </section>
-
-    <!-- 10. ФУТЕР -->
-    <footer class="content-card footer-section">
-      <h2 class="script-footer glow-gold-text">Қадірлі қонағымыз болыңыздар!</h2>
-    </footer>
-
-  </div>
-
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init({ once: true, duration: 1000, easing: 'ease-out' });
-
-    // 1. НАДЕЖНЫЙ ПЛАВНЫЙ СКРОЛЛ НА "БАСТАУ"
-    const scrollBtn = document.getElementById('scrollBtn');
-    const invitationSection = document.getElementById('invitationSection');
-
-    if (scrollBtn && invitationSection) {
-      scrollBtn.addEventListener('click', () => {
-        const yOffset = -20; // Небольшой отступ сверху
-        const y = invitationSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        
-        window.scrollTo({
-          top: y,
-          behavior: 'smooth'
-        });
-      });
-    }
-
-    // 2. Блестки на фоне Canvas
-    const canvas = document.getElementById('sparklesCanvas');
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-
-      function resizeCanvas() {
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = canvas.parentElement.clientHeight;
-      }
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      class Particle {
-        constructor() { this.reset(); }
-        reset() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2.5 + 0.5;
-          this.speedY = Math.random() * 0.5 + 0.2;
-          this.opacity = Math.random();
-          this.fade = Math.random() * 0.01 + 0.003;
+                if (data.online) {
+                    // Если сервер онлайн
+                    statusBadge.textContent = '● Сервер работает';
+                    statusBadge.className = 'status-badge online';
+                    playerCount.textContent = `${data.players.online} / ${data.players.max}`;
+                    serverVersion.textContent = data.version || 'Не определена';
+                } else {
+                    // Если сервер офлайн
+                    statusBadge.textContent = '● Сервер выключен';
+                    statusBadge.className = 'status-badge offline';
+                    playerCount.textContent = '0 / 0';
+                    serverVersion.textContent = 'Офлайн';
+                }
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+                statusBadge.textContent = '● Ошибка запроса';
+                statusBadge.className = 'status-badge offline';
+            }
         }
-        update() {
-          this.y += this.speedY;
-          this.opacity -= this.fade;
-          if (this.y > canvas.height || this.opacity <= 0) {
-            this.reset();
-            this.y = 0;
-            this.opacity = 1;
-          }
+
+        // Функция копирования IP в буфер обмена
+        function copyIp() {
+            const ipText = document.getElementById('serverIp').innerText;
+            navigator.clipboard.writeText(ipText).then(() => {
+                alert('IP-адрес скопирован: ' + ipText);
+            }).catch(err => {
+                console.error('Не удалось скопировать: ', err);
+            });
         }
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
-          ctx.fill();
-        }
-      }
 
-      for (let i = 0; i < 45; i++) particles.push(new Particle());
+        // Запускаем проверку при открытии страницы
+        fetchServerStatus();
 
-      function animateSparkles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(animateSparkles);
-      }
-      animateSparkles();
-    }
-
-    // 3. Музыка
-    const music = document.getElementById('bgMusic');
-    const musicBtn = document.getElementById('musicToggle');
-    let isPlaying = false;
-
-    function toggleMusic() {
-      if (!music || !musicBtn) return;
-      if (isPlaying) {
-        music.pause();
-        musicBtn.classList.remove('spinning');
-      } else {
-        music.play().then(() => musicBtn.classList.add('spinning')).catch(e => console.log(e));
-      }
-      isPlaying = !isPlaying;
-    }
-
-    if (musicBtn) {
-      musicBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleMusic(); });
-    }
-    document.body.addEventListener('click', () => { if (!isPlaying) toggleMusic(); }, { once: true });
-
-    // 4. Таймер
-    const targetDate = new Date("October 3, 2026 19:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
-      if (diff < 0) return;
-
-      document.getElementById("days").innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
-      document.getElementById("hours").innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-      document.getElementById("minutes").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-      document.getElementById("seconds").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
-    }, 1000);
-  </script>
+        // Обновляем данные каждые 30 секунд
+        setInterval(fetchServerStatus, 30000);
+    </script>
 </body>
 </html>
